@@ -40,7 +40,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	Sprite* sprite = new Sprite();
 	sprite->Initialize(spriteCommon);
 
-#pragma endregion 初期化
+#pragma endregion 初期化 
 	//=========================================================
 
 	// ウィンドウのxボタンが押されるまでループ
