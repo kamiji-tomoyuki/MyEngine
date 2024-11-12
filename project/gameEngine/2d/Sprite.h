@@ -18,7 +18,8 @@ class Sprite
 {
 public://メンバ関数
 	//初期化
-	void Initialize(SpriteCommon* spriteCommon, std::string textureFilePath);
+	void Initialize(SpriteCommon* spriteCommon, std::string textureFilePath, 
+		Vector2 position, Vector4 color = { (1) , (1), (1), (1) }, Vector2 anchorpoint = {0.0f,0.0f});
 
 	//更新処理
 	void Update();

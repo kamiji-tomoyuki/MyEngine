@@ -2,7 +2,7 @@
 
 void GamePlayScene::Initialize()
 {
-	
+
 	// --- カメラ ---
 	camera = new Camera();
 	camera->SetRotate({ 0.3f,0.0f,0.0f });
@@ -10,11 +10,11 @@ void GamePlayScene::Initialize()
 	Object3dCommon::GetInstance()->SetDefaultCamera(camera);
 
 	// --- スプライト ---
-	std::string textureFile[] = {"Resources/images/uvChecker.png","Resources/images/monsterBall.png" };
+	std::string textureFile[] = { "Resources/images/uvChecker.png","Resources/images/monsterBall.png" };
 	for (uint32_t i = 0; i < 1; ++i) {
 		Sprite* sprite = new Sprite();
-		sprite->Initialize(SpriteCommon::GetInstance(), textureFile[i]);
-		
+		sprite->Initialize(SpriteCommon::GetInstance(), textureFile[i], { 0,0 }, { 1,1,1,1 }, { 0,0 });
+
 		sprites.push_back(sprite);
 	}
 
@@ -74,8 +74,8 @@ void GamePlayScene::Update()
 		float rotation = sprites[i]->GetRotate();
 		sprites[i]->SetRotate(rotation);
 
-		Vector2 size = { 200.0f,200.0f };
-		sprites[i]->SetSize(size);
+		//Vector2 size = { 200.0f,200.0f };
+		//sprites[i]->SetSize(size);
 
 		Vector4 color = sprites[i]->GetColor();
 		sprites[i]->SetColor(color);
