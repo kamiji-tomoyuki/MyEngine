@@ -2,13 +2,19 @@
 #include "SpriteCommon.h"
 #include "TextureManager.h"
 #include "WinApp.h"
+#include <fstream>
 
 void Sprite::Initialize(SpriteCommon* spriteCommon, std::string textureFilePath,
 	Vector2 position, Vector4 color, Vector2 anchorpoint)
 {
 	// --- 引数で受け取りメンバ変数に記録 ---
 	this->spriteCommon = spriteCommon;
-	this->textureFilePath_ = textureFilePath;
+
+	std::ifstream file;
+	// 基本パスを指定（"Resources/images/"）
+	std::string basePath = "Resources/images/";
+	std::string fullPath = basePath + textureFilePath;
+	this->textureFilePath_ = fullPath;
 
 #pragma region 頂点データ
 	// --- vertexResourceの作成 ---

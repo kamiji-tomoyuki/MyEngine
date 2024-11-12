@@ -44,6 +44,7 @@ void TextureManager::LoadTexture(const std::string& filePath)
 	DirectX::ScratchImage image{};
 	std::wstring filepathW = ConvertString(filePath);
 	HRESULT hr = DirectX::LoadFromWICFile(filepathW.c_str(), DirectX::WIC_FLAGS_FORCE_SRGB, nullptr, image);
+	//HRESULT hr = DirectX::LoadFromWICFile(L"test\\uvChecker.png", DirectX::WIC_FLAGS_FORCE_SRGB, nullptr, image);
 	assert(SUCCEEDED(hr));
 	DirectX::ScratchImage mipImages{};
 	hr = DirectX::GenerateMipMaps(image.GetImages(), image.GetImageCount(), image.GetMetadata(), DirectX::TEX_FILTER_SRGB, 0, mipImages);
