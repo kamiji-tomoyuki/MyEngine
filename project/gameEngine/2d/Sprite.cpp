@@ -3,7 +3,8 @@
 #include "TextureManager.h"
 #include "WinApp.h"
 
-void Sprite::Initialize(SpriteCommon* spriteCommon, std::string textureFilePath)
+void Sprite::Initialize(SpriteCommon* spriteCommon, std::string textureFilePath,
+	Vector2 position, Vector4 color, Vector2 anchorpoint)
 {
 	// --- 引数で受け取りメンバ変数に記録 ---
 	this->spriteCommon = spriteCommon;
@@ -58,6 +59,10 @@ void Sprite::Initialize(SpriteCommon* spriteCommon, std::string textureFilePath)
 
 	// --- 切り取り ---
 	AdjustTextureSize();
+
+	// --- その他引数の適応 ---
+	SetPosition(position);
+	SetAnchorPoint(anchorpoint);
 
 }
 
