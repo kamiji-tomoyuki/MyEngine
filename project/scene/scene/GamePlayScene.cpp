@@ -109,6 +109,9 @@ void GamePlayScene::Update()
 
 void GamePlayScene::Draw()
 {
+	// 描画前処理(Sprite)
+	SpriteCommon::GetInstance()->PreDraw();
+
 	// 描画前処理(Object)
 	Object3dCommon::GetInstance()->PreDraw();
 

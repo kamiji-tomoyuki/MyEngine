@@ -159,10 +159,10 @@
     <ClCompile Include="gameEngine\base\Framework.cpp">
       <Filter>ソース ファイル\gameEngine\base</Filter>
     </ClCompile>
-    <ClCompile Include="gameEngine\scene\MyGame.cpp">
+    <ClCompile Include="scene\base\MyGame.cpp">
       <Filter>ソース ファイル\gameEngine\base</Filter>
     </ClCompile>
-    <ClCompile Include="gameEngine\scene\GamePlayScene.cpp">
+    <ClCompile Include="scene\scene\GamePlayScene.cpp">
       <Filter>ソース ファイル\gameEngine\scene</Filter>
     </ClCompile>
     <ClCompile Include="gameEngine\base\SrvManager.cpp">
@@ -171,16 +171,16 @@
     <ClCompile Include="gameEngine\base\ImGuiManager.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="gameEngine\scene\TitleScene.cpp">
+    <ClCompile Include="scene\scene\TitleScene.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="gameEngine\scene\BaseScene.cpp">
+    <ClCompile Include="scene\base\BaseScene.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="gameEngine\scene\SceneManager.cpp">
+    <ClCompile Include="scene\base\SceneManager.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="gameEngine\scene\SceneFactory.cpp">
+    <ClCompile Include="scene\scene\SceneFactory.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
   </ItemGroup>
@@ -275,13 +275,13 @@
     <ClInclude Include="gameEngine\audio\Audio.h">
       <Filter>ヘッダー ファイル\gameEngine\audio</Filter>
     </ClInclude>
-    <ClInclude Include="gameEngine\scene\MyGame.h">
+    <ClInclude Include="scene\base\MyGame.h">
       <Filter>ヘッダー ファイル\gameEngine\base</Filter>
     </ClInclude>
     <ClInclude Include="gameEngine\base\Framework.h">
       <Filter>ヘッダー ファイル\gameEngine\base</Filter>
     </ClInclude>
-    <ClInclude Include="gameEngine\scene\GamePlayScene.h">
+    <ClInclude Include="scene\scene\GamePlayScene.h">
       <Filter>ヘッダー ファイル\gameEngine\scene</Filter>
     </ClInclude>
     <ClInclude Include="gameEngine\base\SrvManager.h">
@@ -290,19 +290,19 @@
     <ClInclude Include="gameEngine\base\ImGuiManager.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="gameEngine\scene\TitleScene.h">
+    <ClInclude Include="scene\scene\TitleScene.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="gameEngine\scene\BaseScene.h">
+    <ClInclude Include="scene\base\BaseScene.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="gameEngine\scene\SceneManager.h">
+    <ClInclude Include="scene\base\SceneManager.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="gameEngine\scene\AbstractSceneFactory.h">
+    <ClInclude Include="scene\base\AbstractSceneFactory.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="gameEngine\scene\SceneFactory.h">
+    <ClInclude Include="scene\scene\SceneFactory.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
   </ItemGroup>
