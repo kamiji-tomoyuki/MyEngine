@@ -2,7 +2,6 @@
 
 void GamePlayScene::Initialize()
 {
-
 	// --- カメラ ---
 	camera = new Camera();
 	camera->SetRotate({ 0.3f,0.0f,0.0f });
