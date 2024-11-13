@@ -23,19 +23,16 @@ void GamePlayScene::Initialize()
 
 	for (uint32_t i = 0; i < 2; ++i) {
 		Object3d* object = new Object3d();
-		object->Initialize(Object3dCommon::GetInstance());
-
-		Vector3 position;
-		position.x = i * 2.0f;
-
-		object->SetPosition(position);
-
 		if (i == 0) {
-			object->SetModel("plane.obj");
+			object->Initialize(Object3dCommon::GetInstance(),"plane.obj");
 		}
 		if (i == 1) {
-			object->SetModel("axis.obj");
+			object->Initialize(Object3dCommon::GetInstance(), "axis.obj");
 		}
+		
+		Vector3 position;
+		position.x = i * 2.0f;
+		object->SetPosition(position);
 
 		object3ds.push_back(object);
 	}
@@ -44,8 +41,8 @@ void GamePlayScene::Initialize()
 	soundDataSet = Audio::GetInstance()->LoadWav("fanfare.wav");
 	Audio::GetInstance()->SoundPlayWave(soundDataSet, false, 0.02f);
 
-	soundDataSet2 = Audio::GetInstance()->LoadWav("test/xxxxxx.wav");
-	Audio::GetInstance()->SoundPlayWave(soundDataSet2, true, 0.02f);
+	soundDataSet2 = Audio::GetInstance()->LoadWav("test/xxx.wav");
+	Audio::GetInstance()->SoundPlayWave(soundDataSet2, false, 0.02f);
 }
 
 void GamePlayScene::Finalize()
