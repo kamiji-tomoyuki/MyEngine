@@ -120,10 +120,10 @@ void Audio::SoundUnload(Microsoft::WRL::ComPtr<IXAudio2> xAudio2, SoundData* sou
 	soundData->wfex = {};
 }
 
-void Audio::SoundPlayWave(IXAudio2* xAudio2, const SoundData& soundData)
+void Audio::SoundPlayWave(const SoundData& soundData, bool loop, float volume)
 {
 	// 波形フォーマットをもとにSourceVoiceの生成
-	hr = xAudio2->CreateSourceVoice(&pSourceVoice_, &soundData.wfex);
+	hr = xAudio2_->CreateSourceVoice(&pSourceVoice_, &soundData.wfex);
 	assert(SUCCEEDED(hr));
 
 	// 再生する波形データの設定
@@ -131,6 +131,14 @@ void Audio::SoundPlayWave(IXAudio2* xAudio2, const SoundData& soundData)
 	buf.pAudioData = soundData.pBuffer;
 	buf.AudioBytes = soundData.bufferSize;
 	buf.Flags = XAUDIO2_END_OF_STREAM;
+
+	// ボリュームを設定
+	SetVolume(volume);
+
+	// "loop" がtrueの場合ループさせる
+	if (loop) {
+		buf.LoopCount = XAUDIO2_LOOP_INFINITE; // 無限ループ
+	}
 
 	// 波形データの再生
 	hr = pSourceVoice_->SubmitSourceBuffer(&buf);

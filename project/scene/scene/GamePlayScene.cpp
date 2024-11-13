@@ -41,7 +41,11 @@ void GamePlayScene::Initialize()
 	}
 
 	// --- オーディオ ---
-	soundData = Audio::GetInstance()->LoadWav("fanfare.wav");
+	soundDataSet = Audio::GetInstance()->LoadWav("fanfare.wav");
+	Audio::GetInstance()->SoundPlayWave(soundDataSet, false, 0.02f);
+
+	soundDataSet2 = Audio::GetInstance()->LoadWav("test/xx.wav");
+	Audio::GetInstance()->SoundPlayWave(soundDataSet2, true, 0.02f);
 }
 
 void GamePlayScene::Finalize()
@@ -56,7 +60,7 @@ void GamePlayScene::Finalize()
 	}
 	Object3dCommon::GetInstance()->Finalize();
 	ModelManager::GetInstance()->Finalize();
-	Audio::GetInstance()->SoundUnload(Audio::GetInstance()->GetXAudio2(), &soundData);
+	Audio::GetInstance()->SoundUnload(Audio::GetInstance()->GetXAudio2(), &soundDataSet);
 }
 
 void GamePlayScene::Update()
@@ -81,8 +85,6 @@ void GamePlayScene::Update()
 
 		sprites[i]->Update();
 	}
-
-
 
 #pragma endregion スプライト
 
