@@ -44,7 +44,7 @@ void GamePlayScene::Initialize()
 	soundDataSet = Audio::GetInstance()->LoadWav("fanfare.wav");
 	Audio::GetInstance()->SoundPlayWave(soundDataSet, false, 0.02f);
 
-	soundDataSet2 = Audio::GetInstance()->LoadWav("test/xx.wav");
+	soundDataSet2 = Audio::GetInstance()->LoadWav("test/xxxxxx.wav");
 	Audio::GetInstance()->SoundPlayWave(soundDataSet2, true, 0.02f);
 }
 
