@@ -121,7 +121,7 @@ void Audio::SoundUnload(Microsoft::WRL::ComPtr<IXAudio2> xAudio2, SoundData* sou
 	soundData->wfex = {};
 }
 
-void Audio::SoundPlayWave(const SoundData& soundData, bool loop, float volume)
+void Audio::PlayWave(const SoundData& soundData, bool loop, float volume)
 {
 	// 波形フォーマットをもとにSourceVoiceの生成
 	hr = xAudio2_->CreateSourceVoice(&pSourceVoice_, &soundData.wfex);

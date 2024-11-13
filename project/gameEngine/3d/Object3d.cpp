@@ -10,10 +10,12 @@
 #include "../math/CalculateMath.h"
 #include "ModelManager.h"
 
-void Object3d::Initialize(Object3dCommon* object3dCommon)
+void Object3d::Initialize(const std::string& filePath)
 {
 	// --- 引数で受け取りメンバ変数に記録 ---
-	this->object3dCommon = object3dCommon;
+	this->object3dCommon = Object3dCommon::GetInstance();
+	// モデルを設定
+	SetModel(filePath);
 
 	// 座標変換
 	TransformationMatrixResource();

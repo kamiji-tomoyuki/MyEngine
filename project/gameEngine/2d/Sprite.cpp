@@ -4,11 +4,11 @@
 #include "WinApp.h"
 #include <fstream>
 
-void Sprite::Initialize(SpriteCommon* spriteCommon, std::string textureFilePath,
+void Sprite::Initialize(std::string textureFilePath,
 	Vector2 position, Vector4 color, Vector2 anchorpoint)
 {
 	// --- 引数で受け取りメンバ変数に記録 ---
-	this->spriteCommon = spriteCommon;
+	this->spriteCommon = SpriteCommon::GetInstance();
 
 	std::ifstream file;
 	// 基本パスを指定（"Resources/images/"）

@@ -12,7 +12,7 @@ void GamePlayScene::Initialize()
 	std::string textureFile[] = { "test/uvChecker.png","monsterBall.png" };
 	for (uint32_t i = 0; i < 1; ++i) {
 		Sprite* sprite = new Sprite();
-		sprite->Initialize(SpriteCommon::GetInstance(), textureFile[i], { 0,0 }, { 1,1,1,1 }, { 0,0 });
+		sprite->Initialize(textureFile[i], { 0,0 }, { 1,1,1,1 }, { 0,0 });
 
 		sprites.push_back(sprite);
 	}
@@ -23,29 +23,26 @@ void GamePlayScene::Initialize()
 
 	for (uint32_t i = 0; i < 2; ++i) {
 		Object3d* object = new Object3d();
-		object->Initialize(Object3dCommon::GetInstance());
-
-		Vector3 position;
-		position.x = i * 2.0f;
-
-		object->SetPosition(position);
-
 		if (i == 0) {
-			object->SetModel("plane.obj");
+			object->Initialize("plane.obj");
 		}
 		if (i == 1) {
-			object->SetModel("axis.obj");
+			object->Initialize("axis.obj");
 		}
+		
+		Vector3 position;
+		position.x = i * 2.0f;
+		object->SetPosition(position);
 
 		object3ds.push_back(object);
 	}
 
 	// --- オーディオ ---
 	soundDataSet = Audio::GetInstance()->LoadWav("fanfare.wav");
-	Audio::GetInstance()->SoundPlayWave(soundDataSet, false, 0.02f);
+	Audio::GetInstance()->PlayWave(soundDataSet, false, 0.02f);
 
-	soundDataSet2 = Audio::GetInstance()->LoadWav("test/xxxxxx.wav");
-	Audio::GetInstance()->SoundPlayWave(soundDataSet2, true, 0.02f);
+	soundDataSet2 = Audio::GetInstance()->LoadWav("test/xxx.wav");
+	Audio::GetInstance()->PlayWave(soundDataSet2, false, 0.01f);
 }
 
 void GamePlayScene::Finalize()
@@ -60,7 +57,6 @@ void GamePlayScene::Finalize()
 	}
 	Object3dCommon::GetInstance()->Finalize();
 	ModelManager::GetInstance()->Finalize();
-	Audio::GetInstance()->SoundUnload(Audio::GetInstance()->GetXAudio2(), &soundDataSet);
 }
 
 void GamePlayScene::Update()
