@@ -20,7 +20,7 @@ class Object3d
 {
 public:
 	// 初期化
-	void Initialize(Object3dCommon* object3dCommon, const std::string& filePath);
+	void Initialize(const std::string& filePath);
 
 	// 更新処理
 	void Update();

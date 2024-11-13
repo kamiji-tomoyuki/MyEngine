@@ -60,7 +60,7 @@ public:
 	void SoundUnload(Microsoft::WRL::ComPtr<IXAudio2> xAudio2, SoundData* soundData);
 
 	// サウンド再生
-	void SoundPlayWave(const SoundData& soundData, bool loop, float volume);
+	void PlayWave(const SoundData& soundData, bool loop, float volume);
 	// サウンド停止
 	void SoundStop(IXAudio2SourceVoice* pSourceVoice);
 
@@ -76,6 +76,7 @@ private:
 	IXAudio2MasteringVoice* masterVoice_;
 
 	IXAudio2SourceVoice* pSourceVoice_;
+
 
 	HRESULT hr;
 };
