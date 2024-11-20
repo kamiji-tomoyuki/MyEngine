@@ -13,25 +13,27 @@ void GamePlayScene::Initialize()
 	for (uint32_t i = 0; i < 1; ++i) {
 		Sprite* sprite = new Sprite();
 		sprite->Initialize(textureFile[i], { 0,0 }, { 1,1,1,1 }, { 0,0 });
+		sprite->SetSize({ 100.0f,100.0f });
 
 		sprites.push_back(sprite);
 	}
 
 	// --- 3Dオブジェクト ---
-	ModelManager::GetInstance()->LoadModel("test/obj/plane.obj");
-	ModelManager::GetInstance()->LoadModel("test/axis.obj");
+	ModelManager::GetInstance()->LoadModel("animation/AnimatedCube.gltf");
+	ModelManager::GetInstance()->LoadModel("test.obj");
 
 	for (uint32_t i = 0; i < 2; ++i) {
 		Object3d* object = new Object3d();
 		if (i == 0) {
-			object->Initialize("plane.obj");
+			object->Initialize("AnimatedCube.gltf");
 		}
 		if (i == 1) {
-			object->Initialize("axis.obj");
+			object->Initialize("test.obj");
 		}
 		
 		Vector3 position;
 		position.x = i * 2.0f;
+		position.z = 2.0f;
 		object->SetPosition(position);
 
 		object3ds.push_back(object);
@@ -89,16 +91,6 @@ void GamePlayScene::Update()
 	for (uint32_t i = 0; i < object3ds.size(); ++i) {
 		Object3d* obj = object3ds[i];
 		obj->Update();
-
-		Vector3 rotate = obj->GetRotate();
-		if (i == 0) {
-			rotate.x += 0.01f;
-		}
-		else if (i == 1) {
-			rotate.y += 0.01f;
-		}
-
-		obj->SetRotate(rotate);
 	}
 
 #pragma endregion 3Dオブジェクト

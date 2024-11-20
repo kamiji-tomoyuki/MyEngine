@@ -138,9 +138,6 @@
     <ClCompile Include="gameEngine\base\TextureManager.cpp">
       <Filter>ソース ファイル\gameEngine\2d</Filter>
     </ClCompile>
-    <ClCompile Include="gameEngine\math\CalculateMath.cpp">
-      <Filter>ソース ファイル\gameEngine\math</Filter>
-    </ClCompile>
     <ClCompile Include="gameEngine\math\Matrix4x4.cpp">
       <Filter>ソース ファイル\gameEngine\math</Filter>
     </ClCompile>
@@ -182,6 +179,12 @@
     </ClCompile>
     <ClCompile Include="scene\scene\SceneFactory.cpp">
       <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="gameEngine\math\CalculateMath.cpp">
+      <Filter>ソース ファイル\gameEngine\math</Filter>
+    </ClCompile>
+    <ClCompile Include="gameEngine\math\Quaternion.cpp">
+      <Filter>ソース ファイル\gameEngine\math</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -245,9 +248,6 @@
     <ClInclude Include="gameEngine\io\Input.h">
       <Filter>ヘッダー ファイル\gameEngine\io</Filter>
     </ClInclude>
-    <ClInclude Include="gameEngine\math\CalculateMath.h">
-      <Filter>ヘッダー ファイル\gameEngine\math</Filter>
-    </ClInclude>
     <ClInclude Include="gameEngine\math\Matrix4x4.h">
       <Filter>ヘッダー ファイル\gameEngine\math</Filter>
     </ClInclude>
@@ -304,6 +304,12 @@
     </ClInclude>
     <ClInclude Include="scene\scene\SceneFactory.h">
       <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="gameEngine\math\CalculateMath.h">
+      <Filter>ヘッダー ファイル\gameEngine\math</Filter>
+    </ClInclude>
+    <ClInclude Include="gameEngine\math\Quaternion.h">
+      <Filter>ヘッダー ファイル\gameEngine\math</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
