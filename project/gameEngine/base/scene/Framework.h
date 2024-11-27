@@ -27,7 +27,6 @@ public:
 	// 実行
 	void Run();
 
-
 	// 初期化
 	virtual void Initialize();
 
@@ -47,18 +46,10 @@ protected:
 	// 汎用性の高いシステム
 	WinApp* winApp = nullptr;					// WindowsAPI
 	DirectXCommon* dxCommon = nullptr;			// DirectX
-	Input* input = nullptr;						// キーボード入力
-	SrvManager* srvManager = nullptr;			// SRVマネージャ
-	Audio* audio = nullptr;						// オーディオ
+
 	ImGuiManager* imGuiManager = nullptr;		// ImGuiマネージャ
 
-	SceneManager* sceneManager_ = nullptr;		// シーンマネージャ
 	AbstractSceneFactory* 
 		sceneFactory_ = nullptr;				// シーンファクトリー
-
-	SpriteCommon* spriteCommon = nullptr;		// スプライト
-	TextureManager* textureManager = nullptr;	// テクスチャマネージャ
-	Object3dCommon* object3dCommon = nullptr;	// 3Dオブジェクト
-	ModelManager* modelManager = nullptr;		// モデルマネージャ
 };
 
