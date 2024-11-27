@@ -102,28 +102,28 @@
     <ClCompile Include="gameEngine\2d\SpriteCommon.cpp">
       <Filter>ソース ファイル\gameEngine\2d</Filter>
     </ClCompile>
-    <ClCompile Include="gameEngine\3d\Model.cpp">
+    <ClCompile Include="gameEngine\3d\model\Model.cpp">
       <Filter>ソース ファイル\gameEngine\3d</Filter>
     </ClCompile>
-    <ClCompile Include="gameEngine\3d\ModelCommon.cpp">
+    <ClCompile Include="gameEngine\3d\model\ModelCommon.cpp">
       <Filter>ソース ファイル\gameEngine\3d</Filter>
     </ClCompile>
-    <ClCompile Include="gameEngine\3d\ModelManager.cpp">
+    <ClCompile Include="gameEngine\3d\model\ModelManager.cpp">
       <Filter>ソース ファイル\gameEngine\3d</Filter>
     </ClCompile>
-    <ClCompile Include="gameEngine\3d\Object3d.cpp">
+    <ClCompile Include="gameEngine\3d\object\Object3d.cpp">
       <Filter>ソース ファイル\gameEngine\3d</Filter>
     </ClCompile>
-    <ClCompile Include="gameEngine\3d\Object3dCommon.cpp">
+    <ClCompile Include="gameEngine\3d\object\Object3dCommon.cpp">
       <Filter>ソース ファイル\gameEngine\3d</Filter>
     </ClCompile>
-    <ClCompile Include="gameEngine\base\DirectXCommon.cpp">
+    <ClCompile Include="gameEngine\base\DirectX\DirectXCommon.cpp">
       <Filter>ソース ファイル\gameEngine\base</Filter>
     </ClCompile>
     <ClCompile Include="gameEngine\base\WinApp.cpp">
       <Filter>ソース ファイル\gameEngine\base</Filter>
     </ClCompile>
-    <ClCompile Include="gameEngine\base\D3DResourceLeakChecker.cpp">
+    <ClCompile Include="gameEngine\base\DirectX\D3DResourceLeakChecker.cpp">
       <Filter>ソース ファイル\gameEngine\base</Filter>
     </ClCompile>
     <ClCompile Include="gameEngine\io\Input.cpp">
@@ -135,7 +135,7 @@
     <ClCompile Include="gameEngine\utility\StringUtility.cpp">
       <Filter>ソース ファイル\gameEngine\utility</Filter>
     </ClCompile>
-    <ClCompile Include="gameEngine\base\TextureManager.cpp">
+    <ClCompile Include="gameEngine\2d\TextureManager.cpp">
       <Filter>ソース ファイル\gameEngine\2d</Filter>
     </ClCompile>
     <ClCompile Include="gameEngine\math\Matrix4x4.cpp">
@@ -144,40 +144,40 @@
     <ClCompile Include="gameEngine\math\Vector3.cpp">
       <Filter>ソース ファイル\gameEngine\math</Filter>
     </ClCompile>
-    <ClCompile Include="gameEngine\3d\Camera.cpp">
+    <ClCompile Include="gameEngine\3d\camera\Camera.cpp">
       <Filter>ソース ファイル\gameEngine\3d</Filter>
     </ClCompile>
-    <ClCompile Include="gameEngine\3d\CameraManager.cpp">
+    <ClCompile Include="gameEngine\3d\camera\CameraManager.cpp">
       <Filter>ソース ファイル\gameEngine\3d</Filter>
     </ClCompile>
     <ClCompile Include="gameEngine\audio\Audio.cpp">
       <Filter>ソース ファイル\gameEngine\audio</Filter>
     </ClCompile>
-    <ClCompile Include="gameEngine\base\Framework.cpp">
+    <ClCompile Include="gameEngine\base\scene\Framework.cpp">
       <Filter>ソース ファイル\gameEngine\base</Filter>
     </ClCompile>
-    <ClCompile Include="scene\base\MyGame.cpp">
+    <ClCompile Include="scene\MyGame.cpp">
       <Filter>ソース ファイル\gameEngine\base</Filter>
     </ClCompile>
-    <ClCompile Include="scene\scene\GamePlayScene.cpp">
+    <ClCompile Include="scene\GamePlayScene.cpp">
       <Filter>ソース ファイル\gameEngine\scene</Filter>
     </ClCompile>
-    <ClCompile Include="gameEngine\base\SrvManager.cpp">
+    <ClCompile Include="gameEngine\base\DirectX\SrvManager.cpp">
       <Filter>ソース ファイル\gameEngine\base</Filter>
     </ClCompile>
-    <ClCompile Include="gameEngine\base\ImGuiManager.cpp">
+    <ClCompile Include="gameEngine\base\imgui\ImGuiManager.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="scene\scene\TitleScene.cpp">
+    <ClCompile Include="scene\TitleScene.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="scene\base\BaseScene.cpp">
+    <ClCompile Include="gameEngine\base\scene\BaseScene.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="scene\base\SceneManager.cpp">
+    <ClCompile Include="gameEngine\base\scene\SceneManager.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="scene\scene\SceneFactory.cpp">
+    <ClCompile Include="scene\SceneFactory.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
     <ClCompile Include="gameEngine\math\CalculateMath.cpp">
@@ -185,6 +185,15 @@
     </ClCompile>
     <ClCompile Include="gameEngine\math\Quaternion.cpp">
       <Filter>ソース ファイル\gameEngine\math</Filter>
+    </ClCompile>
+    <ClCompile Include="gameEngine\2d\Draw2D.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="gameEngine\3d\ViewProjection.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="gameEngine\3d\WorldTransform.cpp">
+      <Filter>ソース ファイル</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -218,28 +227,28 @@
     <ClInclude Include="gameEngine\2d\SpriteCommon.h">
       <Filter>ヘッダー ファイル\gameEngine\2d</Filter>
     </ClInclude>
-    <ClInclude Include="gameEngine\base\TextureManager.h">
+    <ClInclude Include="gameEngine\2d\TextureManager.h">
       <Filter>ヘッダー ファイル\gameEngine\2d</Filter>
     </ClInclude>
-    <ClInclude Include="gameEngine\3d\Model.h">
+    <ClInclude Include="gameEngine\3d\model\Model.h">
       <Filter>ヘッダー ファイル\gameEngine\3d</Filter>
     </ClInclude>
-    <ClInclude Include="gameEngine\3d\ModelCommon.h">
+    <ClInclude Include="gameEngine\3d\model\ModelCommon.h">
       <Filter>ヘッダー ファイル\gameEngine\3d</Filter>
     </ClInclude>
-    <ClInclude Include="gameEngine\3d\ModelManager.h">
+    <ClInclude Include="gameEngine\3d\model\ModelManager.h">
       <Filter>ヘッダー ファイル\gameEngine\3d</Filter>
     </ClInclude>
-    <ClInclude Include="gameEngine\3d\Object3d.h">
+    <ClInclude Include="gameEngine\3d\object\Object3d.h">
       <Filter>ヘッダー ファイル\gameEngine\3d</Filter>
     </ClInclude>
-    <ClInclude Include="gameEngine\3d\Object3dCommon.h">
+    <ClInclude Include="gameEngine\3d\object\Object3dCommon.h">
       <Filter>ヘッダー ファイル\gameEngine\3d</Filter>
     </ClInclude>
-    <ClInclude Include="gameEngine\base\D3DResourceLeakChecker.h">
+    <ClInclude Include="gameEngine\base\DirectX\D3DResourceLeakChecker.h">
       <Filter>ヘッダー ファイル\gameEngine\base</Filter>
     </ClInclude>
-    <ClInclude Include="gameEngine\base\DirectXCommon.h">
+    <ClInclude Include="gameEngine\base\DirectX\DirectXCommon.h">
       <Filter>ヘッダー ファイル\gameEngine\base</Filter>
     </ClInclude>
     <ClInclude Include="gameEngine\base\WinApp.h">
@@ -266,43 +275,43 @@
     <ClInclude Include="gameEngine\utility\StringUtility.h">
       <Filter>ヘッダー ファイル\gameEngine\utility</Filter>
     </ClInclude>
-    <ClInclude Include="gameEngine\3d\Camera.h">
+    <ClInclude Include="gameEngine\3d\camera\Camera.h">
       <Filter>ヘッダー ファイル\gameEngine\3d</Filter>
     </ClInclude>
-    <ClInclude Include="gameEngine\3d\CameraManager.h">
+    <ClInclude Include="gameEngine\3d\camera\CameraManager.h">
       <Filter>ヘッダー ファイル\gameEngine\3d</Filter>
     </ClInclude>
     <ClInclude Include="gameEngine\audio\Audio.h">
       <Filter>ヘッダー ファイル\gameEngine\audio</Filter>
     </ClInclude>
-    <ClInclude Include="scene\base\MyGame.h">
+    <ClInclude Include="scene\MyGame.h">
       <Filter>ヘッダー ファイル\gameEngine\base</Filter>
     </ClInclude>
-    <ClInclude Include="gameEngine\base\Framework.h">
+    <ClInclude Include="gameEngine\base\scene\Framework.h">
       <Filter>ヘッダー ファイル\gameEngine\base</Filter>
     </ClInclude>
-    <ClInclude Include="scene\scene\GamePlayScene.h">
+    <ClInclude Include="scene\GamePlayScene.h">
       <Filter>ヘッダー ファイル\gameEngine\scene</Filter>
     </ClInclude>
-    <ClInclude Include="gameEngine\base\SrvManager.h">
+    <ClInclude Include="gameEngine\base\DirectX\SrvManager.h">
       <Filter>ヘッダー ファイル\gameEngine\base</Filter>
     </ClInclude>
-    <ClInclude Include="gameEngine\base\ImGuiManager.h">
+    <ClInclude Include="gameEngine\base\imgui\ImGuiManager.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="scene\scene\TitleScene.h">
+    <ClInclude Include="scene\TitleScene.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="scene\base\BaseScene.h">
+    <ClInclude Include="gameEngine\base\scene\BaseScene.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="scene\base\SceneManager.h">
+    <ClInclude Include="gameEngine\base\scene\SceneManager.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="scene\base\AbstractSceneFactory.h">
+    <ClInclude Include="gameEngine\base\scene\AbstractSceneFactory.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="scene\scene\SceneFactory.h">
+    <ClInclude Include="scene\SceneFactory.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
     <ClInclude Include="gameEngine\math\CalculateMath.h">
@@ -310,6 +319,15 @@
     </ClInclude>
     <ClInclude Include="gameEngine\math\Quaternion.h">
       <Filter>ヘッダー ファイル\gameEngine\math</Filter>
+    </ClInclude>
+    <ClInclude Include="gameEngine\2d\Draw2D.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="gameEngine\3d\ViewProjection.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="gameEngine\3d\WorldTransform.h">
+      <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
