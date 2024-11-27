@@ -98,13 +98,33 @@ void GamePlayScene::Update()
 
 void GamePlayScene::Draw()
 {
-	// 描画前処理(Sprite)
+#pragma region 背景 Sprite
+	// ========== 背景 Sprite 描画 ==========
+	// 描画前処理 (Sprite)
 	SpriteCommon::GetInstance()->PreDraw();
+	// ↓ ↓ ↓ ↓ Draw を書き込む ↓ ↓ ↓ ↓
 
-	// 描画前処理(Object)
+
+
+	// ↑ ↑ ↑ ↑ Draw を書き込む ↑ ↑ ↑ ↑
+#pragma endregion
+
+#pragma region Model
+	// ==========    Model 描画    ==========
+	// 描画前処理 (Object)
 	Object3dCommon::GetInstance()->PreDraw();
+	// ↓ ↓ ↓ ↓ Draw を書き込む ↓ ↓ ↓ ↓
 
-	// 描画前処理(Sprite)
+	for (auto& obj : object3ds) {
+		obj->Draw();
+	}
+
+	// ↑ ↑ ↑ ↑ Draw を書き込む ↑ ↑ ↑ ↑
+#pragma endregion
+
+#pragma region 前景 Sprite
+	// ========== 前景 Sprite 描画 ==========
+	// 描画前処理 (Sprite)
 	SpriteCommon::GetInstance()->PreDraw();
 
 	// ↓ ↓ ↓ ↓ Draw を書き込む ↓ ↓ ↓ ↓
@@ -113,9 +133,6 @@ void GamePlayScene::Draw()
 		sprites[i]->Draw();
 	}
 
-	for (auto& obj : object3ds) {
-		obj->Draw();
-	}
-
 	// ↑ ↑ ↑ ↑ Draw を書き込む ↑ ↑ ↑ ↑
+#pragma endregion
 }

@@ -9,7 +9,6 @@ void TitleScene::Initialize()
 	Object3dCommon::GetInstance()->SetDefaultCamera(camera);
 
 	// ===== sample =====
-
 	// --- スプライト ---
 	// スプライト名の指定 (Initializeに直接入れても可)
 	std::string textureFile = "monsterBall.png";
@@ -17,6 +16,7 @@ void TitleScene::Initialize()
 	sprite = new Sprite();
 	sprite->Initialize(textureFile, { 0,0 }, { 1,1,1,1 }, { 0,0 });	// (スプライト名, 座標, 色, アンカーポイント);
 
+	// --- オブジェクト ---
 }
 
 void TitleScene::Finalize()
@@ -36,7 +36,6 @@ void TitleScene::Update()
 
 	// ===== sample =====
 	// スプライト ( ↓ 変更可能ステータス ↓ )
-	
 	// 座標
 	Vector2 position = { 0.0f, 0.0f };
 	sprite->SetPosition(position);
@@ -56,8 +55,8 @@ void TitleScene::Update()
 	// オブジェクト
 
 	// --- シーン移行処理 ---
-	// SPACEキーを押したら
-	if (Input::GetInstance()->TriggerKey(DIK_SPACE)) {
+	// ENTERキーを押した時
+	if (Input::GetInstance()->TriggerKey(DIK_RETURN)) {
 		// 次のシーンを生成
 		SceneManager::GetInstance()->ChangeScene("GAMEPLAY");
 	}
@@ -65,9 +64,30 @@ void TitleScene::Update()
 
 void TitleScene::Draw()
 {
+#pragma region 背景 Sprite
+	// ========== 背景 Sprite 描画 ==========
+	// 描画前処理 (Sprite)
+	SpriteCommon::GetInstance()->PreDraw();
+	// ↓ ↓ ↓ ↓ Draw を書き込む ↓ ↓ ↓ ↓
+	
+
+
+	// ↑ ↑ ↑ ↑ Draw を書き込む ↑ ↑ ↑ ↑
+#pragma endregion
+
+#pragma region Model
+	// ==========    Model 描画    ==========
 	// 描画前処理 (Object)
 	Object3dCommon::GetInstance()->PreDraw();
+	// ↓ ↓ ↓ ↓ Draw を書き込む ↓ ↓ ↓ ↓
 
+
+
+	// ↑ ↑ ↑ ↑ Draw を書き込む ↑ ↑ ↑ ↑
+#pragma endregion
+	
+#pragma region 前景 Sprite
+	// ========== 前景 Sprite 描画 ==========
 	// 描画前処理 (Sprite)
 	SpriteCommon::GetInstance()->PreDraw();
 
@@ -76,7 +96,6 @@ void TitleScene::Draw()
 	// ===== sample =====
 	sprite->Draw();
 
-
-
 	// ↑ ↑ ↑ ↑ Draw を書き込む ↑ ↑ ↑ ↑
+#pragma endregion
 }
