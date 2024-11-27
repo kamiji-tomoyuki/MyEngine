@@ -24,7 +24,7 @@ void Object3d::Initialize(const std::string& filePath)
 
 	// --- Transform変数の作成 ---
 	transform = { {1.0f,1.0f,1.0f},{0.0f,0.0f,0.0f},{0.0f,0.0f,0.0f} };
-	
+
 	// --- cameraの設置 ---
 	this->camera = object3dCommon->GetDefaultCamera();
 
@@ -32,6 +32,10 @@ void Object3d::Initialize(const std::string& filePath)
 
 void Object3d::Update()
 {
+	if (model->GetModelData().isAnimation) {
+		model->Update();
+	}
+
 	// --- world座標変換 ---
 	Matrix4x4 worldMatrix = MakeAffineMatrix(transform.scale, transform.rotate, transform.translate);
 	Matrix4x4 worldViewProjectionMatrix;
@@ -44,8 +48,8 @@ void Object3d::Update()
 	}
 
 	// --- transformationMatrixDataの更新 ---
-	transformationMatrixData->WVP = worldViewProjectionMatrix;
-	transformationMatrixData->World = worldMatrix;
+	transformData->WVP = model->GetModelData().rootNode.localMatrix * worldViewProjectionMatrix;
+	transformData->World = model->GetModelData().rootNode.localMatrix * worldMatrix;
 }
 
 void Object3d::Draw()
@@ -75,10 +79,10 @@ void Object3d::TransformationMatrixResource()
 	transformationMatrixResource = object3dCommon->GetDxCommon()->CreateBufferResource(sizeof(TransformationMatrix));
 
 	// --- transformationMatrixDataに割り当てる ---
-	transformationMatrixResource->Map(0, nullptr, reinterpret_cast<void**>(&transformationMatrixData));
+	transformationMatrixResource->Map(0, nullptr, reinterpret_cast<void**>(&transformData));
 
-	transformationMatrixData->WVP = MakeIdentity4x4();
-	transformationMatrixData->World = MakeIdentity4x4();
+	transformData->WVP = MakeIdentity4x4();
+	transformData->World = MakeIdentity4x4();
 }
 void Object3d::DirectionalLightResource()
 {

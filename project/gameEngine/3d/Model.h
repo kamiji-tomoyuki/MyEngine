@@ -1,26 +1,25 @@
 #pragma once
 #include <d3d12.h>
+#include <map>
 #include <string>
 #include <vector>
 #include <wrl.h>
 
-#include "../math/Vector2.h"
-#include "../math/Vector3.h"
-#include "../math/Vector4.h"
-#include "../math/Matrix4x4.h"
+#include <assimp/Importer.hpp>
+#include <assimp/scene.h>
+#include <assimp/postprocess.h>
+
+#include "Vector2.h"
+#include "Vector3.h"
+#include "Vector4.h"
+#include "Matrix4x4.h"
+#include "Quaternion.h"
 
 class ModelCommon;
 
 // 3Dモデル
 class Model
 {
-public:
-	// 初期化
-	void Initialize(ModelCommon* modelCommon, const std::string& directorypath, const std::string& filename);
-
-	// 描画処理
-	void Draw();
-
 private:
 	// ===== 構造体 =====
 	// --- 頂点データ ---
@@ -70,11 +69,58 @@ private:
 		Vector3 rotate;
 		Vector3 translate;
 	};
+	// --- Node情報 ---
+	struct Node {
+		Matrix4x4 localMatrix;
+		std::string name;
+		std::vector<Node> children;
+	};
 	// --- モデルデータ ---
 	struct ModelData {
 		std::vector<VertexData> vertices;
 		MaterialData material;
+		Node rootNode;
+		bool isAnimation;
 	};
+	// --- キーフレーム ---
+	template <typename tValue>
+	struct Keyframe {
+		float time;		// キーフレームの時刻
+		tValue value;	// キーフレームの値
+	};
+	using KeyframeVector3 = Keyframe<Vector3>;
+	using KeyframeQuaternion = Keyframe<Quaternion>;
+	// --- Nodeのアニメーション ---
+	template <typename tValue>
+	struct AnimationCurve {
+		std::vector<Keyframe<tValue>> keyframes;
+	};
+	struct NodeAnimation
+	{
+		std::vector<KeyframeVector3> translate;
+		std::vector<KeyframeQuaternion> rotate;
+		std::vector<KeyframeVector3> scale;
+	};
+	// --- アニメーション ---
+	struct Animation
+	{
+		float duration;	//アニメーション全体の尺
+		// NodeAnimationの集合
+		std::map<std::string, NodeAnimation> nodeAnimations;
+	};
+
+public:
+	// 初期化
+	void Initialize(ModelCommon* modelCommon, const std::string& directorypath, const std::string& filename);
+
+	// 更新処理
+	void Update();
+
+	// 描画処理
+	void Draw();
+
+public:
+	ModelData GetModelData() { return modelData_; }
 
 private:
 	//Data書き込み
@@ -84,7 +130,15 @@ private:
 	// .mtlファイルの読み取り
 	static MaterialData LoadMaterialTemplateFile(const std::string& directoryPath, const std::string& filename);
 	//.objファイルの読み取り
-	static ModelData LoadObjFile(const std::string& directoryPath, const std::string& filename);
+	static ModelData LoadModelFile(const std::string& directoryPath, const std::string& filename);
+	// Animationの解析
+	Animation LoadAnimationFile(const std::string& directoryPath, const std::string& filename);
+	
+	// Node情報の読み取り
+	static Node ReadNode(aiNode* node);
+	// animationの時刻を取得
+	Vector3 CalculateValue(const std::vector<KeyframeVector3>& keyframes, float time);
+	Quaternion CalculateValue(const std::vector<KeyframeQuaternion>& keyframes, float time);
 
 private:
 	// --- ModelCommon ---
@@ -92,6 +146,8 @@ private:
 
 	// --- Objファイル ---
 	ModelData modelData_;
+	// アニメーションタイマー
+	float animationTime = 0.0f;
 
 	// --- バッファリソース ---
 	// VertexResource
@@ -109,5 +165,9 @@ private:
 	
 	// --- Transform ---
 	Transform transform;
+
+	// --- アニメーション ---
+	Animation animation;
+
 };
 

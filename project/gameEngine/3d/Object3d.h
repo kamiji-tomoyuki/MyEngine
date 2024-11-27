@@ -6,6 +6,7 @@
 #include <wrl.h>
 
 #include "Camera.h"
+#include "Model.h"
 
 #include "Vector2.h"
 #include "Vector3.h"
@@ -64,7 +65,7 @@ private:
 	// バッファリソース
 	Microsoft::WRL::ComPtr<ID3D12Resource> transformationMatrixResource;
 	// バッファリソース内のデータを指すポインタ
-	TransformationMatrix* transformationMatrixData = nullptr;
+	TransformationMatrix* transformData = nullptr;
 
 	// --- 平行光源 ---
 	struct DirectionalLight {
