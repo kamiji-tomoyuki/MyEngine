@@ -1,5 +1,4 @@
 #include "TitleScene.h"
-#include <Input.h>
 
 void TitleScene::Initialize()
 {
@@ -9,50 +8,55 @@ void TitleScene::Initialize()
 	camera->SetTranslate({ 0.0f,4.0f,-10.0f });
 	Object3dCommon::GetInstance()->SetDefaultCamera(camera);
 
-	// --- スプライト ---
-	std::string textureFile[] = { "monsterBall.png" };
-	for (uint32_t i = 0; i < 1; ++i) {
-		Sprite* sprite = new Sprite();
-		sprite->Initialize(textureFile[i], { 0,0 }, { 1,1,1,1 }, { 0,0 });
+	// ===== sample =====
 
-		sprites.push_back(sprite);
-	}
-	sceneManager_ = SceneManager::GetInstance();
+	// --- スプライト ---
+	// スプライト名の指定 (Initializeに直接入れても可)
+	std::string textureFile = "monsterBall.png";
+	// 生成・初期化
+	sprite = new Sprite();
+	sprite->Initialize(textureFile, { 0,0 }, { 1,1,1,1 }, { 0,0 });	// (スプライト名, 座標, 色, アンカーポイント);
+
 }
 
 void TitleScene::Finalize()
 {
 	// 各解放処理
 	delete camera;
-	for (Sprite* sprite : sprites) {
-		delete sprite;
-	}
+
+	// ===== sample =====
+	delete sprite;
 	Audio::GetInstance()->SoundUnload(Audio::GetInstance()->GetXAudio2(), &soundData);
 }
 
 void TitleScene::Update()
 {
-	//カメラの更新
+	// カメラの更新
 	camera->Update();
 
-	for (uint32_t i = 0; i < 1; ++i) {
-		Vector2 position = { 200.0f * i, 0.0f };
-		sprites[i]->SetPosition(position);
+	// ===== sample =====
+	// スプライト ( ↓ 変更可能ステータス ↓ )
+	
+	// 座標
+	Vector2 position = { 0.0f, 0.0f };
+	sprite->SetPosition(position);
+	// 回転
+	float rotation = sprite->GetRotate();
+	sprite->SetRotate(rotation);
+	// スケール
+	Vector2 size = { 200.0f,200.0f };
+	sprite->SetSize(size);
+	// 色
+	Vector4 color = sprite->GetColor();
+	sprite->SetColor(color);
 
-		float rotation = sprites[i]->GetRotate();
-		sprites[i]->SetRotate(rotation);
+	// 更新
+	sprite->Update();
 
-		Vector2 size = { 200.0f,200.0f };
-		sprites[i]->SetSize(size);
-
-		Vector4 color = sprites[i]->GetColor();
-		sprites[i]->SetColor(color);
-
-		sprites[i]->Update();
-	}
+	// オブジェクト
 
 	// --- シーン移行処理 ---
-	// ENTERキーを押したら
+	// SPACEキーを押したら
 	if (Input::GetInstance()->TriggerKey(DIK_SPACE)) {
 		// 次のシーンを生成
 		SceneManager::GetInstance()->ChangeScene("GAMEPLAY");
@@ -61,17 +65,18 @@ void TitleScene::Update()
 
 void TitleScene::Draw()
 {
-	// 描画前処理(Object)
+	// 描画前処理 (Object)
 	Object3dCommon::GetInstance()->PreDraw();
 
-	// 描画前処理(Sprite)
+	// 描画前処理 (Sprite)
 	SpriteCommon::GetInstance()->PreDraw();
 
 	// ↓ ↓ ↓ ↓ Draw を書き込む ↓ ↓ ↓ ↓
 
-	for (uint32_t i = 0; i < 1; ++i) {
-		sprites[i]->Draw();
-	}
+	// ===== sample =====
+	sprite->Draw();
+
+
 
 	// ↑ ↑ ↑ ↑ Draw を書き込む ↑ ↑ ↑ ↑
 }

@@ -47,10 +47,10 @@ void MyGame::Update()
 
 void MyGame::Draw()
 {
-	//　描画前処理　(SRV)
+	// 描画前処理 (SRV)
 	SrvManager::GetInstance()->PreDraw();
 
-	//　描画前処理　(DirectX)
+	// 描画前処理 (DirectX)
 	dxCommon->PreDraw();
 
 	// --- シーンの描画処理 ---
