@@ -1,18 +1,35 @@
 #include "Draw2D.h"
-#include "Logger.h"
 #include "imgui.h"
-#include "CalculateMath.h"
 #include <cassert>
 
-Draw2D* Draw2D::instance_ = nullptr;
+#include "Logger.h"
+
+#include "CalculateMath.h"
+
+Draw2D* Draw2D::instance = nullptr;
 
 Draw2D* Draw2D::GetInstance()
 {
-	if (instance_ == nullptr)
-	{
-		instance_ = new Draw2D();
+	if (instance == nullptr) {
+		instance = new Draw2D;
 	}
-	return instance_;
+	return instance;
+}
+
+void Draw2D::Finalize()
+{
+	transformationMatrixBuffer_->Release();
+
+	triangleData_->vertexBuffer->Release();
+
+	boxData_->vertexBuffer->Release();
+
+	boxData_->indexBuffer->Release();
+
+	lineData_->vertexBuffer->Release();
+
+	delete instance;
+	instance = nullptr;
 }
 
 void Draw2D::Initialize(DirectXCommon* dxCommon)
@@ -43,38 +60,6 @@ void Draw2D::Initialize(DirectXCommon* dxCommon)
 
 	// 球の頂点位置を計算
 	CalcSphereVertexData();
-}
-
-void Draw2D::Finalize()
-{
-	transformationMatrixBuffer_->Release();
-
-	triangleData_->vertexBuffer->Release();
-
-	boxData_->vertexBuffer->Release();
-
-	boxData_->indexBuffer->Release();
-
-	lineData_->vertexBuffer->Release();
-
-
-	if (instance_ != nullptr)
-	{
-		delete instance_;
-		instance_ = nullptr;
-	}
-}
-
-void Draw2D::Update()
-{
-
-}
-
-void Draw2D::ImGui()
-{
-#ifdef _DEBUG
-
-#endif // _DEBUG
 }
 
 void Draw2D::DrawTriangle(const Vector2& pos1, const Vector2& pos2, const Vector2& pos3, const Vector4& color)

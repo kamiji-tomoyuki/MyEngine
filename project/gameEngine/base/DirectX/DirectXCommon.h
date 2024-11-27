@@ -11,7 +11,7 @@
 #include "Logger.h"
 #include "StringUtility.h"
 
-#include "../../externals/DirectXTex/DirectXTex.h"
+#include "../externals/DirectXTex/DirectXTex.h"
 
 class DirectXCommon
 {

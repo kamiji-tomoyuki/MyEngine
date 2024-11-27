@@ -152,8 +152,10 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="gameEngine\2d\Draw2D.h" />
+    <ClInclude Include="gameEngine\3d\model\ModelStruct.h" />
     <ClInclude Include="gameEngine\3d\ViewProjection.h" />
     <ClInclude Include="gameEngine\3d\WorldTransform.h" />
+    <ClInclude Include="gameEngine\audio\AudioStruct.h" />
     <ClInclude Include="gameEngine\math\CalculateMath.h" />
     <ClInclude Include="gameEngine\math\Quaternion.h" />
     <ClInclude Include="gameEngine\base\scene\AbstractSceneFactory.h" />

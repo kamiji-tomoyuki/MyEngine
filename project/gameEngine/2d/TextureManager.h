@@ -7,7 +7,7 @@
 #include "DirectXCommon.h"
 #include "SrvManager.h"
 
-#include "../../externals/DirectXTex/DirectXTex.h"
+#include "../externals/DirectXTex/DirectXTex.h"
 
 using namespace Microsoft::WRL;
 

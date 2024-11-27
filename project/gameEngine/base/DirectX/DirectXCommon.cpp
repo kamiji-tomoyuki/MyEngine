@@ -7,7 +7,7 @@
 
 #include "imgui_impl_dx12.h"
 #include "imgui_impl_win32.h"
-#include "../../externals/DirectXTex/d3dx12.h"
+#include "../externals/DirectXTex/d3dx12.h"
 
 #pragma comment(lib, "d3d12.lib")
 #pragma comment(lib, "dxgi.lib")
@@ -18,13 +18,13 @@ const uint32_t DirectXCommon::kMaxSRVCount = 512;
 
 void DirectXCommon::Initialize(WinApp* winApp)
 {
-	//NULL検出
+	// NULL検出
 	assert(winApp);
 
-	//FPS固定初期化
+	// FPS固定初期化
 	InitializeFixFPS();
 
-	//メンバ変数に記録
+	// メンバ変数に記録
 	this->winApp_ = winApp;
 
 	//初期化・生成
@@ -309,10 +309,6 @@ void DirectXCommon::PreDraw()
 
 	// --- 画面全体の深度をクリア ---
 	commandList->ClearDepthStencilView(dsvHandle, D3D12_CLEAR_FLAG_DEPTH, 1.0f, 0, 0, nullptr);
-
-	// --- SRV用のデスクリプタヒープを指定する ---
-	//Microsoft::WRL::ComPtr<ID3D12DescriptorHeap> descriptorHeaps[] = { srvDescriptorHeap };
-	//commandList->SetDescriptorHeaps(1, descriptorHeaps->GetAddressOf());
 
 	// --- ビューポート領域の設定 ---
 	commandList->RSSetViewports(1, &viewport);
@@ -601,7 +597,7 @@ DirectX::ScratchImage DirectXCommon::LoadTexture(const std::string& filePath)
 
 void DirectXCommon::InitializeFixFPS()
 {
-	//現在時間を記録
+	// 現在時間を記録
 	reference_ = std::chrono::steady_clock::now();
 }
 

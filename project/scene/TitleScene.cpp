@@ -1,4 +1,5 @@
 #include "TitleScene.h"
+#include <Input.h>
 
 void TitleScene::Initialize()
 {
@@ -52,7 +53,7 @@ void TitleScene::Update()
 
 	// --- シーン移行処理 ---
 	// ENTERキーを押したら
-	if (Input::GetInstance()->TriggerKey(DIK_RETURN)) {
+	if (Input::GetInstance()->TriggerKey(DIK_SPACE)) {
 		// 次のシーンを生成
 		SceneManager::GetInstance()->ChangeScene("GAMEPLAY");
 	}

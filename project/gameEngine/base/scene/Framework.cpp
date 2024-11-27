@@ -26,7 +26,6 @@ void Framework::Run()
 
 		// 描画
 		Draw();
-
 	}
 
 	// ===== 解放処理 =====
@@ -66,24 +65,14 @@ void Framework::Initialize()
 	// スプライト
 	SpriteCommon::GetInstance()->Initialize(dxCommon);
 
-	// キーボード入力
-	Input::GetInstance()->Initialize(winApp);
-
-	// オーディオ
-	Audio::GetInstance()->Initialize();
-
 	// シーンマネージャ
 	SceneManager::GetInstance();
-
 }
 
 void Framework::Update()
 {
 	// シーンマネージャの更新
 	SceneManager::GetInstance()->Update();
-
-	// 入力の更新
-	Input::GetInstance()->Update();
 }
 
 void Framework::Finalize()
@@ -97,10 +86,6 @@ void Framework::Finalize()
 	Object3dCommon::GetInstance()->Finalize();
 
 	SpriteCommon::GetInstance()->Finalize();
-
-	Input::GetInstance()->Finalize();
-
-	Audio::GetInstance()->Finalize();
 
 	SceneManager::GetInstance()->Finalize();
 

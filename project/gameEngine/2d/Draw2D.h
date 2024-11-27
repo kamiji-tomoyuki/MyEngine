@@ -1,29 +1,39 @@
 #pragma once
 #include "DirectXCommon.h"
+#include <list>
+#include <vector>
+
 #include "Vector4.h"
 #include "Vector2.h"
 #include "Vector3.h"
 #include "Matrix4x4.h"
-#include <vector>
-#include <list>
 
 using namespace std;
 
 // ComPtrのエイリアス
 template<class T> using ComPtr = Microsoft::WRL::ComPtr<T>;
 
+// ラインの描画
 class Draw2D
 {
-private: // シングルトン設定
-	// インスタンス
-	static Draw2D* instance_;
+#pragma region シングルトンインスタンス
+private:
+	static Draw2D* instance;
 
 	Draw2D() = default;
 	~Draw2D() = default;
 	Draw2D(const Draw2D&) = delete;
-	Draw2D& operator=(const Draw2D&) = delete;
+	Draw2D& operator = (const Draw2D&) = delete;
 
-public: // 構造体
+public:
+	// シングルトンインスタンスの取得
+	static Draw2D* GetInstance();
+	// 終了
+	void Finalize();
+#pragma endregion シングルトンインスタンス
+
+public: 
+	// ===== 構造体 =====
 	struct VertexData
 	{
 		Vector2 position;
@@ -77,107 +87,56 @@ public: // 構造体
 	};
 
 public: // メンバ関数
-
-	/// <summary>
-	/// インスタンスの取得
-	/// </summary>
-	static Draw2D* GetInstance();
-
-	/// <summary>
-	/// 初期化
-	/// </summary>
+	// 初期化
 	void Initialize(DirectXCommon* dxCommon_);
 
-	/// <summary>
-	/// 終了処理
-	/// </summary>
-	void Finalize();
-
-	/// <summary>
-	/// 更新
-	/// </summary>
-	void Update();
-
-	/// <summary>
-	/// ImGuiの描画
-	/// </summary>
-	void ImGui();
-
-	/// <summary>
-	/// 三角形の描画
-	/// </summary>
+	// 三角形の描画
 	void DrawTriangle(const Vector2& pos1, const Vector2& pos2, const Vector2& pos3, const Vector4& color);
 
-	/// <summary>
-	/// 矩形の描画
-	/// </summary>
+	// 矩形の描画
 	void DrawBox(const Vector2& pos, const Vector2& size, const Vector4& color);
 	void DrawBox(const Vector2& pos, const Vector2& size, const float angle, const Vector4& color);
 
-	/// <summary>
-	/// 線の描画
-	/// </summary>
+	// 線の描画
 	void DrawLine(const Vector2& start, const Vector2& end, const Vector4& color);
 	void DrawLine(const Vector2& start, const Vector2& end, const Vector4& color, const Matrix4x4& viewProjectionMatrix);
 
+	// 球の描画
 	void DrawSphere(const Vector3& center, const float radius, const Vector4& color, const Matrix4x4& viewProjectionMatrix);
 
-	/// <summary>
-	/// リセット
-	/// </summary>
+	// リセット
 	void Reset();
 
-	// -----------------------------------Getters-----------------------------------//
-	/// <summary>
-	/// デバッグ用ビューマトリックスを取得
-	/// <summary>
+public:
+	// デバッグ用ビューマトリックスの取得
 	const Matrix4x4& GetProjectionMatrix() const { return projectionMatrix_; }
 
-	// -----------------------------------Setters-----------------------------------//
-	/// <summary>
-	/// プロジェクションマトリックスを設定
-	/// <summary>
+	// プロジェクションマトリックスの設定
 	void SetProjectionMatrix(const Matrix4x4& projectionMatrix) { projectionMatrix_ = projectionMatrix; }
 
-private: // プライベートメンバ関数
-	/// <summary>
-	/// ルートシグネチャの作成
-	/// </summary>
+private:
+	// ルートシグネチャの作成
 	void CreateRootSignature(ComPtr<ID3D12RootSignature>& rootSignature);
 
-	/// <summary>
-	/// パイプラインステートの生成
-	/// </summary>
+	// パイプラインステートの生成
 	void CreatePSO(D3D12_PRIMITIVE_TOPOLOGY_TYPE primitiveTopologyType, ComPtr<ID3D12PipelineState>& pipelineState, ComPtr<ID3D12RootSignature>& rootSignature);
 
-	/// <summary>
-	/// 三角形の頂点データを生成
-	/// </summary>
+	// 三角形の頂点データの生成
 	void CreateTriangleVertexData(TriangleData* triangleData);
 
-	/// <summary>
-	/// 矩形の頂点データを生成
-	/// </summary>
+	// 矩形の頂点データの生成
 	void CreateBoxVertexData(BoxData* boxData);
 
-	///<summary>
-	/// 線の頂点データを生成
-	/// </summary>
+	// 線の頂点データの生成
 	void CreateLineVertexData(LineData* lineData);
 
-	///<summary>
-	/// 座標変換行列データを生成
-	/// </summary>
+	// 座標変換行列データの生成
 	void CreateTransformMatData();
 
-	/// <summary>
-	/// 球の頂点位置を計算
-	/// </summary>
+	// 球の頂点位置の計算
 	void CalcSphereVertexData();
 
-private: // メンバ変数
-
-	// DX12Basicクラスのインスタンス
+private:
 	DirectXCommon* dxCommon_;
 
 	const uint32_t kTrriangleMaxCount = 30096;
@@ -190,14 +149,14 @@ private: // メンバ変数
 	const uint32_t kLineMaxCount = 100000;
 	const uint32_t kVertexCountLine = 2;
 
-	// 三角形のインデクス
+	// 三角形のインデックス
 	uint32_t triangleIndex_ = 0;
 
-	// 矩形のインデクス
+	// 矩形のインデックス
 	uint32_t boxIndexIndex_ = 0;
 	uint32_t boxVertexIndex_ = 0;
 
-	// 線のインデクス
+	// 線のインデックス
 	uint32_t lineIndex_ = 0;
 
 	// マトリックス
