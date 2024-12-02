@@ -1,17 +1,10 @@
 #pragma once
-#include "DirectXCommon.h"
+#include <Draw2DStruct.h>
 #include <list>
 #include <vector>
 
-#include "Vector4.h"
-#include "Vector2.h"
-#include "Vector3.h"
-#include "Matrix4x4.h"
 
 using namespace std;
-
-// ComPtrのエイリアス
-template<class T> using ComPtr = Microsoft::WRL::ComPtr<T>;
 
 // ラインの描画
 class Draw2D
@@ -33,59 +26,7 @@ public:
 #pragma endregion シングルトンインスタンス
 
 public: 
-	// ===== 構造体 =====
-	struct VertexData
-	{
-		Vector2 position;
-		Vector4 color;
-	};
-
-	// 座標変換行列データ
-	struct TransformationMatrix
-	{
-		Matrix4x4 WVP;
-	};
-
-	// 三角形構造体
-	struct TriangleData
-	{
-		VertexData* vertexData;
-		// 頂点バッファ
-		ComPtr<ID3D12Resource> vertexBuffer;
-		// 頂点バッファビュー
-		D3D12_VERTEX_BUFFER_VIEW vertexBufferView;
-	};
-
-	// 矩形構造体
-	struct BoxData
-	{
-		VertexData* vertexData;
-		uint32_t* indexData;
-		// 頂点バッファ
-		ComPtr<ID3D12Resource> vertexBuffer;
-		// インデックスバッファ
-		ComPtr<ID3D12Resource> indexBuffer;
-		// 頂点バッファビュー
-		D3D12_VERTEX_BUFFER_VIEW vertexBufferView;
-		// インデックスバッファビュー
-		D3D12_INDEX_BUFFER_VIEW indexBufferView;
-	};
-
-	// 線分構造体
-	struct LineData
-	{
-		VertexData* vertexData;
-		// 頂点バッファ
-		ComPtr<ID3D12Resource> vertexBuffer;
-		// 頂点バッファビュー
-		D3D12_VERTEX_BUFFER_VIEW vertexBufferView;
-	};
-
-	struct Sphere {
-		Vector3 center;
-		float radius;
-	};
-
+	
 public: // メンバ関数
 	// 初期化
 	void Initialize(DirectXCommon* dxCommon_);
@@ -116,10 +57,10 @@ public:
 
 private:
 	// ルートシグネチャの作成
-	void CreateRootSignature(ComPtr<ID3D12RootSignature>& rootSignature);
+	void CreateRootSignature(Microsoft::WRL::ComPtr<ID3D12RootSignature>& rootSignature);
 
 	// パイプラインステートの生成
-	void CreatePSO(D3D12_PRIMITIVE_TOPOLOGY_TYPE primitiveTopologyType, ComPtr<ID3D12PipelineState>& pipelineState, ComPtr<ID3D12RootSignature>& rootSignature);
+	void CreatePSO(D3D12_PRIMITIVE_TOPOLOGY_TYPE primitiveTopologyType, Microsoft::WRL::ComPtr<ID3D12PipelineState>& pipelineState, Microsoft::WRL::ComPtr<ID3D12RootSignature>& rootSignature);
 
 	// 三角形の頂点データの生成
 	void CreateTriangleVertexData(TriangleData* triangleData);
@@ -178,7 +119,7 @@ private:
 	Microsoft::WRL::ComPtr<ID3D12Resource> transformationMatrixBuffer_;
 
 	// 座標変換行列データ
-	TransformationMatrix* transformationMatrixData_;
+	TransformationMatrix2D* transformationMatrixData_;
 
 	// 三角形データ
 	TriangleData* triangleData_;

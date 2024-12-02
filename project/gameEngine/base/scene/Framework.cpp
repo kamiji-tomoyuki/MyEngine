@@ -62,6 +62,9 @@ void Framework::Initialize()
 	// 3Dオブジェクト
 	Object3dCommon::GetInstance()->Initialize(dxCommon);
 
+	// ライン
+	Draw2D::GetInstance()->Initialize(dxCommon);
+
 	// スプライト
 	SpriteCommon::GetInstance()->Initialize(dxCommon);
 
@@ -86,6 +89,8 @@ void Framework::Finalize()
 	Object3dCommon::GetInstance()->Finalize();
 
 	SpriteCommon::GetInstance()->Finalize();
+
+	Draw2D::GetInstance()->Finalize();
 
 	SceneManager::GetInstance()->Finalize();
 

@@ -4,7 +4,7 @@
 Camera::Camera() 
 : transform({ {1.0f,1.0f,1.0f},{0.0f,0.0f,0.0f},{0.0f,0.0f,0.0f} })
 , fovY(0.45f)
-, aspectRatio(float(WinApp::kClientWidth) / float(WinApp::kClientHeight))
+, aspectRatio(float(kClientWidth) / float(kClientHeight))
 , nearClip(0.1f)
 , farClip(100.0f)
 , worldMatrix(MakeAffineMatrix(transform.scale, transform.rotate, transform.translate))

@@ -7,6 +7,7 @@
 #include <SceneFactory.h>
 #include <WinApp.h>
 
+#include <Draw2D.h>
 #include <ModelManager.h>
 #include <Object3dCommon.h>
 #include <SceneManager.h>

@@ -48,7 +48,7 @@ void Sprite::Update()
 	transform.scale = { size.x, size.y, 1.0f };
 	worldMatrix = MakeAffineMatrix(transform.scale, transform.rotate, transform.translate);
 	viewMatrix = MakeIdentity4x4();
-	projectionMatrix = MakeOrthographicMatrix(0.0f, 0.0f, float(WinApp::kClientWidth), float(WinApp::kClientHeight), 0.0f, 100.0f);
+	projectionMatrix = MakeOrthographicMatrix(0.0f, 0.0f, float(kClientWidth), float(kClientHeight), 0.0f, 100.0f);
 
 	// --- transformationMatrixDataの更新 ---
 	transformationMatrixData->WVP = worldMatrix * viewMatrix * projectionMatrix;

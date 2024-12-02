@@ -163,8 +163,8 @@ void DirectXCommon::SwapChainCreate()
 	HRESULT hr;
 
 	// --- スワップチェーン生成・設定 ---
-	swapChainDesc.Width = WinApp::kClientWidth;                  // 画面の幅。ウィンドウンおクライアント領域を同じものにしておく
-	swapChainDesc.Height = WinApp::kClientHeight;                // 画面の高さ。ウィンドウのクライアント領域を同じものにしておく
+	swapChainDesc.Width = kClientWidth;                  // 画面の幅。ウィンドウンおクライアント領域を同じものにしておく
+	swapChainDesc.Height = kClientHeight;                // 画面の高さ。ウィンドウのクライアント領域を同じものにしておく
 	swapChainDesc.Format = DXGI_FORMAT_R8G8B8A8_UNORM;           // 色の形式
 	swapChainDesc.SampleDesc.Count = 1;                          // マルチサンプルしない
 	swapChainDesc.BufferUsage = DXGI_USAGE_RENDER_TARGET_OUTPUT; // 描画のターゲットとして利用する
@@ -180,7 +180,7 @@ void DirectXCommon::SwapChainCreate()
 void DirectXCommon::DepthBufferCreate()
 {
 	// --- DepthStencilTextureをウィンドウサイズで作成 ---
-	depthStencilResource = CreateDepthStencilTextureResource(device_, WinApp::kClientWidth, WinApp::kClientHeight);
+	depthStencilResource = CreateDepthStencilTextureResource(device_, kClientWidth, kClientHeight);
 }
 
 void DirectXCommon::DescriptorHeapCreate()
@@ -250,8 +250,8 @@ void DirectXCommon::FenceInitialize()
 void DirectXCommon::ViewportRectInitialize()
 {
 	// --- ビューポート矩形の設定 ---
-	viewport.Width = WinApp::kClientWidth;
-	viewport.Height = WinApp::kClientHeight;
+	viewport.Width = kClientWidth;
+	viewport.Height = kClientHeight;
 	viewport.TopLeftX = 0;
 	viewport.TopLeftY = 0;
 	viewport.MinDepth = 0.0f;
@@ -262,9 +262,9 @@ void DirectXCommon::ScissorRect()
 {
 	// --- シザー矩形の設定 ---
 	scissorRect.left = 0;
-	scissorRect.right = WinApp::kClientWidth;
+	scissorRect.right = kClientWidth;
 	scissorRect.top = 0;
-	scissorRect.bottom = WinApp::kClientHeight;
+	scissorRect.bottom = kClientHeight;
 }
 
 void DirectXCommon::DXCCompilerCreate()

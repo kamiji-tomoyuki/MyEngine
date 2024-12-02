@@ -4,6 +4,10 @@
 
 #include "imgui.h"
 
+// クライアント領域のサイズ
+static const int32_t kClientWidth = 1280;
+static const int32_t kClientHeight = 720;
+
 class WinApp
 {
 public:// 静的メンバ関数
@@ -26,11 +30,6 @@ public:
 	// getter
 	HINSTANCE GetHInstance()const { return wc_.hInstance; }
 	HWND GetHwnd()const { return hwnd_; }
-
-public:// 定数
-	// クライアント領域のサイズ
-	static const int32_t kClientWidth = 1280;
-	static const int32_t kClientHeight = 720;
 
 private:
 	// ウインドウクラスの設定

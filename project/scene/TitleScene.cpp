@@ -69,7 +69,7 @@ void TitleScene::Draw()
 	// 描画前処理 (Sprite)
 	SpriteCommon::GetInstance()->PreDraw();
 	// ↓ ↓ ↓ ↓ Draw を書き込む ↓ ↓ ↓ ↓
-	
+
 
 
 	// ↑ ↑ ↑ ↑ Draw を書き込む ↑ ↑ ↑ ↑
@@ -85,7 +85,7 @@ void TitleScene::Draw()
 
 	// ↑ ↑ ↑ ↑ Draw を書き込む ↑ ↑ ↑ ↑
 #pragma endregion
-	
+
 #pragma region 前景 Sprite
 	// ========== 前景 Sprite 描画 ==========
 	// 描画前処理 (Sprite)
@@ -95,6 +95,8 @@ void TitleScene::Draw()
 
 	// ===== sample =====
 	sprite->Draw();
+	Draw2D::GetInstance()->DrawBox({ kClientWidth / 2 , kClientHeight / 2 }, { 100.0f,100.0f }, { 1.0f, 1.0f, 1.0f, 1.0f });
+	Draw2D::GetInstance()->DrawLine({ 0.0f,0.0f }, { 200.0f,200.0f }, { 1.0f, 1.0f, 1.0f, 1.0f });
 
 	// ↑ ↑ ↑ ↑ Draw を書き込む ↑ ↑ ↑ ↑
 #pragma endregion
