@@ -40,7 +40,7 @@ void GamePlayScene::Initialize()
 	}
 
 	// --- オーディオ ---
-	soundDataSet = Audio::GetInstance()->LoadWav("BGM.wav");
+	soundDataSet = Audio::GetInstance()->LoadWav("mokugyo.wav");
 	Audio::GetInstance()->PlayWave(soundDataSet, true, 0.02f);
 
 	soundDataSet2 = Audio::GetInstance()->LoadWav("test/xxx.wav");
@@ -75,13 +75,11 @@ void GamePlayScene::Update()
 		float rotation = sprites[i]->GetRotate();
 		sprites[i]->SetRotate(rotation);
 
-		//Vector2 size = { 200.0f,200.0f };
-		//sprites[i]->SetSize(size);
+		Vector2 size = sprites[i]->GetSize();
+		sprites[i]->SetSize(size);
 
 		Vector4 color = sprites[i]->GetColor();
 		sprites[i]->SetColor(color);
-
-		sprites[i]->Update();
 	}
 
 #pragma endregion スプライト
@@ -90,7 +88,6 @@ void GamePlayScene::Update()
 
 	for (uint32_t i = 0; i < object3ds.size(); ++i) {
 		Object3d* obj = object3ds[i];
-		obj->Update();
 	}
 
 #pragma endregion 3Dオブジェクト

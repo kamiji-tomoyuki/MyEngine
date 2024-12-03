@@ -69,11 +69,7 @@ private:
 	// マテリアルリソースにデータを書き込むためのポインタ
 	Material* materialData = nullptr;
 	
-	// --- Transform ---
-	WorldTransform transform;
-
 	// --- アニメーション ---
 	Animation animation;
-
 };
 

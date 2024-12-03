@@ -78,6 +78,9 @@ void Sprite::Update()
 
 void Sprite::Draw()
 {
+	// --- 更新 ---
+	Update();
+
 	// --- vertexBufferViewの生成 ---
 	spriteCommon->GetDxCommon()->GetCommandList()->IASetVertexBuffers(0, 1, &vertexBufferView);
 	// --- indexBufferViewの生成 ---
@@ -94,7 +97,6 @@ void Sprite::Draw()
 
 	// --- 描画(DrawCall/ドローコール) ---
 	spriteCommon->GetDxCommon()->GetCommandList()->DrawIndexedInstanced(vertexCount, 1, 0, 0, 0);
-
 }
 
 void Sprite::CreateVertexData()

@@ -49,11 +49,6 @@ void TitleScene::Update()
 	Vector4 color = sprite->GetColor();
 	sprite->SetColor(color);
 
-	// 更新
-	sprite->Update();
-
-	// オブジェクト
-
 	// --- シーン移行処理 ---
 	// ENTERキーを押した時
 	if (Input::GetInstance()->TriggerKey(DIK_RETURN)) {

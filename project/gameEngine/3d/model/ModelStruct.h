@@ -58,13 +58,6 @@ struct DirectionalLight {
 	float intensity;   // 輝度
 };
 
-// --- Transform ---
-struct WorldTransform {
-	Vector3 scale;
-	Vector3 rotate;
-	Vector3 translate;
-};
-
 // --- Node情報 ---
 struct Node {
 	Matrix4x4 localMatrix;

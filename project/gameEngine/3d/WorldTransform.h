@@ -64,9 +64,9 @@ private:
 	Microsoft::WRL::ComPtr<ID3D12Resource> constBuffer_;
 	// マッピング済みアドレス
 	ConstBufferDataWorldTransform* constMap = nullptr;
-	// コピー禁止
-	WorldTransform(const WorldTransform&) = delete;
-	WorldTransform& operator=(const WorldTransform&) = delete;
+	//// コピー禁止
+	//WorldTransform(const WorldTransform&) = delete;
+	//WorldTransform& operator=(const WorldTransform&) = delete;
 };
 
-static_assert(!std::is_copy_assignable_v<WorldTransform>);
+//static_assert(!std::is_copy_assignable_v<WorldTransform>);
