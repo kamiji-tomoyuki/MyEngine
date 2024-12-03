@@ -8,40 +8,15 @@ void GamePlayScene::Initialize()
 	camera->SetTranslate({ 0.0f,4.0f,-10.0f });
 	Object3dCommon::GetInstance()->SetDefaultCamera(camera);
 
-	// --- スプライト ---
-	std::string textureFile[] = { "test/uvChecker.png","monsterBall.png" };
-	for (uint32_t i = 0; i < 1; ++i) {
-		Sprite* sprite = new Sprite();
-		sprite->Initialize(textureFile[i], { 0,0 }, { 1,1,1,1 }, { 0,0 });
-		sprite->SetSize({ 100.0f,100.0f });
-
-		sprites.push_back(sprite);
-	}
-
-	// --- 3Dオブジェクト ---
-	ModelManager::GetInstance()->LoadModel("animation/AnimatedCube.gltf");
-	ModelManager::GetInstance()->LoadModel("test.obj");
-
-	for (uint32_t i = 0; i < 2; ++i) {
-		Object3d* object = new Object3d();
-		if (i == 0) {
-			object->Initialize("AnimatedCube.gltf");
-		}
-		if (i == 1) {
-			object->Initialize("test.obj");
-		}
-		
-		Vector3 position;
-		position.x = i * 2.0f;
-		position.z = 2.0f;
-		object->SetPosition(position);
-
-		object3ds.push_back(object);
-	}
+	// --- サンプル ---
+	sample = std::make_unique<Sample>();
+	sample->Initialize();
 
 	// --- オーディオ ---
+	// 音声データ読み込み (「 Resources / audio 」は省略 )
 	soundDataSet = Audio::GetInstance()->LoadWav("mokugyo.wav");
-	Audio::GetInstance()->PlayWave(soundDataSet, true, 0.02f);
+	// 再生
+	Audio::GetInstance()->PlayWave(soundDataSet, true, 0.02f);	// ( 音声データ変数, ループ, ボリューム ( 0 ~ 1 ) );
 
 	soundDataSet2 = Audio::GetInstance()->LoadWav("test/xxx.wav");
 	Audio::GetInstance()->PlayWave(soundDataSet2, false, 0.01f);
@@ -51,14 +26,7 @@ void GamePlayScene::Finalize()
 {
 	// 各解放処理
 	delete camera;
-	for (auto& obj : object3ds) {
-		delete obj;
-	}
-	for (Sprite* sprite : sprites) {
-		delete sprite;
-	}
 	Object3dCommon::GetInstance()->Finalize();
-	ModelManager::GetInstance()->Finalize();
 }
 
 void GamePlayScene::Update()
@@ -66,31 +34,8 @@ void GamePlayScene::Update()
 	//カメラの更新
 	camera->Update();
 
-#pragma region スプライト
-
-	for (uint32_t i = 0; i < 1; ++i) {
-		Vector2 position = { 200.0f * i, 0.0f };
-		sprites[i]->SetPosition(position);
-
-		float rotation = sprites[i]->GetRotate();
-		sprites[i]->SetRotate(rotation);
-
-		Vector2 size = sprites[i]->GetSize();
-		sprites[i]->SetSize(size);
-
-		Vector4 color = sprites[i]->GetColor();
-		sprites[i]->SetColor(color);
-	}
-
-#pragma endregion スプライト
-
-#pragma region 3Dオブジェクト
-
-	for (uint32_t i = 0; i < object3ds.size(); ++i) {
-		Object3d* obj = object3ds[i];
-	}
-
-#pragma endregion 3Dオブジェクト
+	// サンプルクラス更新
+	sample->Update();
 }
 
 void GamePlayScene::Draw()
@@ -112,10 +57,6 @@ void GamePlayScene::Draw()
 	Object3dCommon::GetInstance()->PreDraw();
 	// ↓ ↓ ↓ ↓ Draw を書き込む ↓ ↓ ↓ ↓
 
-	for (auto& obj : object3ds) {
-		obj->Draw();
-	}
-
 	// ↑ ↑ ↑ ↑ Draw を書き込む ↑ ↑ ↑ ↑
 #pragma endregion
 
@@ -126,9 +67,7 @@ void GamePlayScene::Draw()
 
 	// ↓ ↓ ↓ ↓ Draw を書き込む ↓ ↓ ↓ ↓
 
-	for (uint32_t i = 0; i < 1; ++i) {
-		sprites[i]->Draw();
-	}
+	sample->Draw();
 
 	// ↑ ↑ ↑ ↑ Draw を書き込む ↑ ↑ ↑ ↑
 #pragma endregion
