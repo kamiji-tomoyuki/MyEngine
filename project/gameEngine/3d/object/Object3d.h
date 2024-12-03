@@ -49,7 +49,7 @@ public:
 	void SetCamera(Camera* camera) { this->camera = camera; }
 
 private:
-	//Data書き込み
+	// Data書き込み
 	void TransformationMatrixResource();
 	void DirectionalLightResource();
 

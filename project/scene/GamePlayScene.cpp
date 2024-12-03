@@ -40,8 +40,8 @@ void GamePlayScene::Initialize()
 	}
 
 	// --- オーディオ ---
-	soundDataSet = Audio::GetInstance()->LoadWav("fanfare.wav");
-	Audio::GetInstance()->PlayWave(soundDataSet, false, 0.02f);
+	soundDataSet = Audio::GetInstance()->LoadWav("mokugyo.wav");
+	Audio::GetInstance()->PlayWave(soundDataSet, true, 0.02f);
 
 	soundDataSet2 = Audio::GetInstance()->LoadWav("test/xxx.wav");
 	Audio::GetInstance()->PlayWave(soundDataSet2, false, 0.01f);
@@ -75,13 +75,11 @@ void GamePlayScene::Update()
 		float rotation = sprites[i]->GetRotate();
 		sprites[i]->SetRotate(rotation);
 
-		//Vector2 size = { 200.0f,200.0f };
-		//sprites[i]->SetSize(size);
+		Vector2 size = sprites[i]->GetSize();
+		sprites[i]->SetSize(size);
 
 		Vector4 color = sprites[i]->GetColor();
 		sprites[i]->SetColor(color);
-
-		sprites[i]->Update();
 	}
 
 #pragma endregion スプライト
@@ -90,7 +88,6 @@ void GamePlayScene::Update()
 
 	for (uint32_t i = 0; i < object3ds.size(); ++i) {
 		Object3d* obj = object3ds[i];
-		obj->Update();
 	}
 
 #pragma endregion 3Dオブジェクト
@@ -98,13 +95,33 @@ void GamePlayScene::Update()
 
 void GamePlayScene::Draw()
 {
-	// 描画前処理(Sprite)
+#pragma region 背景 Sprite
+	// ========== 背景 Sprite 描画 ==========
+	// 描画前処理 (Sprite)
 	SpriteCommon::GetInstance()->PreDraw();
+	// ↓ ↓ ↓ ↓ Draw を書き込む ↓ ↓ ↓ ↓
 
-	// 描画前処理(Object)
+
+
+	// ↑ ↑ ↑ ↑ Draw を書き込む ↑ ↑ ↑ ↑
+#pragma endregion
+
+#pragma region Model
+	// ==========    Model 描画    ==========
+	// 描画前処理 (Object)
 	Object3dCommon::GetInstance()->PreDraw();
+	// ↓ ↓ ↓ ↓ Draw を書き込む ↓ ↓ ↓ ↓
 
-	// 描画前処理(Sprite)
+	for (auto& obj : object3ds) {
+		obj->Draw();
+	}
+
+	// ↑ ↑ ↑ ↑ Draw を書き込む ↑ ↑ ↑ ↑
+#pragma endregion
+
+#pragma region 前景 Sprite
+	// ========== 前景 Sprite 描画 ==========
+	// 描画前処理 (Sprite)
 	SpriteCommon::GetInstance()->PreDraw();
 
 	// ↓ ↓ ↓ ↓ Draw を書き込む ↓ ↓ ↓ ↓
@@ -113,9 +130,6 @@ void GamePlayScene::Draw()
 		sprites[i]->Draw();
 	}
 
-	for (auto& obj : object3ds) {
-		obj->Draw();
-	}
-
 	// ↑ ↑ ↑ ↑ Draw を書き込む ↑ ↑ ↑ ↑
+#pragma endregion
 }

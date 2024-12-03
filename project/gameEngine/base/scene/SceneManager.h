@@ -1,6 +1,5 @@
 #pragma once
 #include <BaseScene.h>
-
 #include <AbstractSceneFactory.h>
 
 // シーン管理

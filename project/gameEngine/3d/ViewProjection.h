@@ -86,7 +86,7 @@ private:
 	void XMStoreMatrix4x4(Matrix4x4& dest, const DirectX::XMMATRIX& src);
 
 private:
-	//dxCommon
+	// dxCommon
 	DirectXCommon* dxCommon_;
 	// 定数バッファ
 	Microsoft::WRL::ComPtr<ID3D12Resource> constBuffer_;

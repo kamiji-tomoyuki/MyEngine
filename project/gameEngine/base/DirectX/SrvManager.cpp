@@ -1,6 +1,21 @@
 #include "Windows.h"
 #include "SrvManager.h"
 
+SrvManager* SrvManager::instance = nullptr;
+
+SrvManager* SrvManager::GetInstance()
+{
+	if (instance == nullptr) {
+		instance = new SrvManager;
+	}
+	return instance;
+}
+void SrvManager::Finalize()
+{
+	delete instance;
+	instance = nullptr;
+}
+
 const uint32_t SrvManager::kMaxSRVCount = 512;
 
 void SrvManager::Initialize(DirectXCommon* dxCommon)

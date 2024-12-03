@@ -1,26 +1,43 @@
 #include "Draw2D.h"
-#include "Logger.h"
 #include "imgui.h"
-#include "CalculateMath.h"
 #include <cassert>
 
-Draw2D* Draw2D::instance_ = nullptr;
+#include "Logger.h"
+
+#include "CalculateMath.h"
+
+Draw2D* Draw2D::instance = nullptr;
 
 Draw2D* Draw2D::GetInstance()
 {
-	if (instance_ == nullptr)
-	{
-		instance_ = new Draw2D();
+	if (instance == nullptr) {
+		instance = new Draw2D;
 	}
-	return instance_;
+	return instance;
+}
+
+void Draw2D::Finalize()
+{
+	transformationMatrixBuffer_->Release();
+
+	triangleData_->vertexBuffer->Release();
+
+	boxData_->vertexBuffer->Release();
+
+	boxData_->indexBuffer->Release();
+
+	lineData_->vertexBuffer->Release();
+
+	delete instance;
+	instance = nullptr;
 }
 
 void Draw2D::Initialize(DirectXCommon* dxCommon)
 {
 	dxCommon_ = dxCommon;
 
-	projectionMatrix_ = MakeOrthographicMatrix(0.0f, 0.0f, float(WinApp::kClientWidth), float(WinApp::kClientHeight), 0.0f, 1.0f);
-	viewPortMatrix_ = MakeViewportMatrix(0.0f, 0.0f, float(WinApp::kClientWidth), float(WinApp::kClientHeight), 0.0f, 1.0f);
+	projectionMatrix_ = MakeOrthographicMatrix(0.0f, 0.0f, float(kClientWidth), float(kClientHeight), 0.0f, 1.0f);
+	viewPortMatrix_ = MakeViewportMatrix(0.0f, 0.0f, float(kClientWidth), float(kClientHeight), 0.0f, 1.0f);
 
 	// パイプラインステートの生成
 	CreatePSO(D3D12_PRIMITIVE_TOPOLOGY_TYPE_TRIANGLE, trianglePipelineState_, triangleRootSignature_);
@@ -43,38 +60,6 @@ void Draw2D::Initialize(DirectXCommon* dxCommon)
 
 	// 球の頂点位置を計算
 	CalcSphereVertexData();
-}
-
-void Draw2D::Finalize()
-{
-	transformationMatrixBuffer_->Release();
-
-	triangleData_->vertexBuffer->Release();
-
-	boxData_->vertexBuffer->Release();
-
-	boxData_->indexBuffer->Release();
-
-	lineData_->vertexBuffer->Release();
-
-
-	if (instance_ != nullptr)
-	{
-		delete instance_;
-		instance_ = nullptr;
-	}
-}
-
-void Draw2D::Update()
-{
-
-}
-
-void Draw2D::ImGui()
-{
-#ifdef _DEBUG
-
-#endif // _DEBUG
 }
 
 void Draw2D::DrawTriangle(const Vector2& pos1, const Vector2& pos2, const Vector2& pos3, const Vector4& color)
@@ -314,7 +299,7 @@ void Draw2D::Reset()
 	lineIndex_ = 0;
 }
 
-void Draw2D::CreateRootSignature(ComPtr<ID3D12RootSignature>& rootSignature)
+void Draw2D::CreateRootSignature(Microsoft::WRL::ComPtr<ID3D12RootSignature>& rootSignature)
 {
 	HRESULT hr;
 
@@ -347,7 +332,7 @@ void Draw2D::CreateRootSignature(ComPtr<ID3D12RootSignature>& rootSignature)
 	assert(SUCCEEDED(hr));
 }
 
-void Draw2D::CreatePSO(D3D12_PRIMITIVE_TOPOLOGY_TYPE primitiveTopologyType, ComPtr<ID3D12PipelineState>& pipelineState, ComPtr<ID3D12RootSignature>& rootSignature)
+void Draw2D::CreatePSO(D3D12_PRIMITIVE_TOPOLOGY_TYPE primitiveTopologyType, Microsoft::WRL::ComPtr<ID3D12PipelineState>& pipelineState, Microsoft::WRL::ComPtr<ID3D12RootSignature>& rootSignature)
 {
 
 	HRESULT hr;
@@ -420,7 +405,7 @@ void Draw2D::CreatePSO(D3D12_PRIMITIVE_TOPOLOGY_TYPE primitiveTopologyType, ComP
 
 void Draw2D::CreateTriangleVertexData(TriangleData* triangleData)
 {
-	UINT vertexBufferSize = sizeof(VertexData) * kVertexCountTrriangle * kTrriangleMaxCount;
+	UINT vertexBufferSize = sizeof(VertexData2D) * kVertexCountTrriangle * kTrriangleMaxCount;
 
 	// 頂点リソースを生成
 	triangleData->vertexBuffer = dxCommon_->CreateBufferResource(vertexBufferSize);
@@ -429,7 +414,7 @@ void Draw2D::CreateTriangleVertexData(TriangleData* triangleData)
 	// 頂点バッファビューを作成する
 	triangleData->vertexBufferView.BufferLocation = triangleData->vertexBuffer->GetGPUVirtualAddress();
 	triangleData->vertexBufferView.SizeInBytes = vertexBufferSize;
-	triangleData->vertexBufferView.StrideInBytes = sizeof(VertexData);
+	triangleData->vertexBufferView.StrideInBytes = sizeof(VertexData2D);
 
 	// 頂点リソースをマップ
 	triangleData->vertexBuffer->Map(0, nullptr, reinterpret_cast<void**>(&triangleData->vertexData));
@@ -438,7 +423,7 @@ void Draw2D::CreateTriangleVertexData(TriangleData* triangleData)
 
 void Draw2D::CreateBoxVertexData(BoxData* boxData)
 {
-	UINT vertexBufferSize = sizeof(VertexData) * kVertexCountBox * kBoxMaxCount;
+	UINT vertexBufferSize = sizeof(VertexData2D) * kVertexCountBox * kBoxMaxCount;
 	UINT indexBufferSize = sizeof(uint32_t) * kIndexCountBox * kBoxMaxCount;
 
 	// 頂点リソースを生成
@@ -450,7 +435,7 @@ void Draw2D::CreateBoxVertexData(BoxData* boxData)
 	// 頂点バッファビューを作成する
 	boxData->vertexBufferView.BufferLocation = boxData->vertexBuffer->GetGPUVirtualAddress();
 	boxData->vertexBufferView.SizeInBytes = vertexBufferSize;
-	boxData->vertexBufferView.StrideInBytes = sizeof(VertexData);
+	boxData->vertexBufferView.StrideInBytes = sizeof(VertexData2D);
 
 	// インデックスバッファビューを作成する
 	boxData->indexBufferView.BufferLocation = boxData->indexBuffer->GetGPUVirtualAddress();
@@ -466,7 +451,7 @@ void Draw2D::CreateBoxVertexData(BoxData* boxData)
 
 void Draw2D::CreateLineVertexData(LineData* lineData)
 {
-	UINT vertexBufferSize = sizeof(VertexData) * kVertexCountLine * kLineMaxCount;
+	UINT vertexBufferSize = sizeof(VertexData2D) * kVertexCountLine * kLineMaxCount;
 
 	// 頂点リソースを生成
 	lineData->vertexBuffer = dxCommon_->CreateBufferResource(vertexBufferSize);
@@ -475,7 +460,7 @@ void Draw2D::CreateLineVertexData(LineData* lineData)
 	// 頂点バッファビューを作成する
 	lineData->vertexBufferView.BufferLocation = lineData->vertexBuffer->GetGPUVirtualAddress();
 	lineData->vertexBufferView.SizeInBytes = vertexBufferSize;
-	lineData->vertexBufferView.StrideInBytes = sizeof(VertexData);
+	lineData->vertexBufferView.StrideInBytes = sizeof(VertexData2D);
 
 	// 頂点リソースをマップ
 	lineData->vertexBuffer->Map(0, nullptr, reinterpret_cast<void**>(&lineData->vertexData));
@@ -484,7 +469,7 @@ void Draw2D::CreateLineVertexData(LineData* lineData)
 void Draw2D::CreateTransformMatData()
 {
 	// 座標変換行列リソースを生成
-	transformationMatrixBuffer_ = dxCommon_->CreateBufferResource(sizeof(TransformationMatrix));
+	transformationMatrixBuffer_ = dxCommon_->CreateBufferResource(sizeof(TransformationMatrix2D));
 
 	// 座標変換行列リソースをマップ
 	transformationMatrixBuffer_->Map(0, nullptr, reinterpret_cast<void**>(&transformationMatrixData_));

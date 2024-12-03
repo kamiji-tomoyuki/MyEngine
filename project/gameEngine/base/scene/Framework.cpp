@@ -3,6 +3,7 @@
 
 void Framework::Run()
 {
+	// ===== 初期化処理 =====
 	Initialize();
 
 	while (true) {
@@ -25,89 +26,84 @@ void Framework::Run()
 
 		// 描画
 		Draw();
-
 	}
 
-	// ゲーム終了
+	// ===== 解放処理 =====
 	Finalize();
 }
 
 void Framework::Initialize()
 {
+	// --- ウィンドウの初期化 ---
 	// WindowsAPI
 	winApp = new WinApp();
 	winApp->Initialize();
 
+	// --- 基盤システムの初期化 ---
 	// DirectX
 	dxCommon = new DirectXCommon();
 	dxCommon->Initialize(winApp);
 
-	// キーボード入力
-	input = Input::GetInstance();
-	input->Initialize(winApp);
-
-	// SRVマネージャ
-	srvManager = new SrvManager();
-	srvManager->Initialize(dxCommon);
-
-	// オーディオ
-	audio = Audio::GetInstance();
-	audio->Initialize();
-
+#ifdef _DEBUG
 	// ImGui
 	imGuiManager = new ImGuiManager();
 	imGuiManager->Initialize(winApp, dxCommon);
+#endif
 
-	// シーンマネージャ
-	sceneManager_ = SceneManager::GetInstance();
-
-	// スプライト
-	spriteCommon = SpriteCommon::GetInstance();
-	spriteCommon->Initialize(dxCommon);
+	// SRVマネージャ
+	SrvManager::GetInstance()->Initialize(dxCommon);
 
 	// テクスチャマネージャ
-	textureManager = TextureManager::GetInstance();
-	textureManager->Initialize(dxCommon, srvManager);
-
-	// 3Dオブジェクト
-	object3dCommon = Object3dCommon::GetInstance();
-	object3dCommon->Initialize(dxCommon);
+	TextureManager::GetInstance()->Initialize(dxCommon);
 
 	// モデルマネージャ
-	modelManager = ModelManager::GetInstance();
-	modelManager->Initialize(dxCommon);
+	ModelManager::GetInstance()->Initialize(dxCommon);
 
+	// 3Dオブジェクト
+	Object3dCommon::GetInstance()->Initialize(dxCommon);
+
+	// ライン
+	Draw2D::GetInstance()->Initialize(dxCommon);
+
+	// スプライト
+	SpriteCommon::GetInstance()->Initialize(dxCommon);
+
+	// シーンマネージャ
+	SceneManager::GetInstance();
 }
 
 void Framework::Update()
 {
 	// シーンマネージャの更新
-	sceneManager_->Update();
-
-	// 入力の更新
-	input->Update();
+	SceneManager::GetInstance()->Update();
 }
 
 void Framework::Finalize()
 {
-	winApp->Finalize();
-	delete winApp;
-	winApp = nullptr;
+	SrvManager::GetInstance()->Finalize();
 
-	delete dxCommon;
-	input->Finalize();
-	delete srvManager;
+	TextureManager::GetInstance()->Finalize();
 
-	delete sceneFactory_;
-	sceneManager_->Finalize();
+	ModelManager::GetInstance()->Finalize();
 
-	audio->Finalize();
-	spriteCommon->Finalize();
-	textureManager->Finalize();
-	object3dCommon->Finalize();
-	modelManager->Finalize();
+	Object3dCommon::GetInstance()->Finalize();
 
+	SpriteCommon::GetInstance()->Finalize();
+
+	Draw2D::GetInstance()->Finalize();
+
+	SceneManager::GetInstance()->Finalize();
+
+#ifdef _DEBUG
 	imGuiManager->Finalize();
 	delete imGuiManager;
+#endif
+
+	delete dxCommon;
+
+	delete sceneFactory_;
+
+	winApp->Finalize();
+	delete winApp;
 }
 

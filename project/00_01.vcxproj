@@ -93,6 +93,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
       <AdditionalIncludeDirectories>$(ProjectDir)gameEngine\2d;$(ProjectDir)gameEngine\3d;$(ProjectDir)gameEngine\audio;$(ProjectDir)gameEngine\base;$(ProjectDir)gameEngine\io;$(ProjectDir)gameEngine\utility;$(ProjectDir)gameEngine\math;$(ProjectDir)externals\imgui;$(ProjectDir)scene;$(ProjectDir)externals\assimp\include;$(ProjectDir)gameEngine\3d\camera;$(ProjectDir)gameEngine\3d\model;$(ProjectDir)gameEngine\3d\object;$(ProjectDir)gameEngine\base\scene;$(ProjectDir)gameEngine\base\DirectX;$(ProjectDir)gameEngine\base\imgui;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <Optimization>MinSpace</Optimization>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -152,8 +153,11 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="gameEngine\2d\Draw2D.h" />
+    <ClInclude Include="gameEngine\2d\Draw2DStruct.h" />
+    <ClInclude Include="gameEngine\3d\model\ModelStruct.h" />
     <ClInclude Include="gameEngine\3d\ViewProjection.h" />
     <ClInclude Include="gameEngine\3d\WorldTransform.h" />
+    <ClInclude Include="gameEngine\audio\AudioStruct.h" />
     <ClInclude Include="gameEngine\math\CalculateMath.h" />
     <ClInclude Include="gameEngine\math\Quaternion.h" />
     <ClInclude Include="gameEngine\base\scene\AbstractSceneFactory.h" />

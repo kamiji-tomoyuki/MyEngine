@@ -4,6 +4,22 @@
 // SRV管理
 class SrvManager
 {
+#pragma region シングルトンインスタンス
+private:
+	static SrvManager* instance;
+
+	SrvManager() = default;
+	~SrvManager() = default;
+	SrvManager(SrvManager&) = delete;
+	SrvManager& operator = (SrvManager&) = delete;
+
+public:
+	// シングルトンインスタンスの取得
+	static SrvManager* GetInstance();
+	// 終了
+	void Finalize();
+#pragma endregion シングルトンインスタンス
+
 public:
 	// 初期化
 	void Initialize(DirectXCommon* dxCommon);

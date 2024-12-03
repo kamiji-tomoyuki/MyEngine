@@ -19,11 +19,11 @@ void TextureManager::Finalize()
 	instance = nullptr;
 }
 
-void TextureManager::Initialize(DirectXCommon* dxCommon, SrvManager* srvManager)
+void TextureManager::Initialize(DirectXCommon* dxCommon)
 {
 	// メンバ変数として記録
 	this->dxCommon = dxCommon;
-	this->srvManager = srvManager;
+	this->srvManager = SrvManager::GetInstance();
 
 	// SRVの数と同数
 	textureDatas.rehash(kSRVIndexTop < SrvManager::kMaxSRVCount);

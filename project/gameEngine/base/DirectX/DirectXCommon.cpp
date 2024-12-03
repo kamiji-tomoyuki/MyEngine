@@ -7,7 +7,7 @@
 
 #include "imgui_impl_dx12.h"
 #include "imgui_impl_win32.h"
-#include "../../externals/DirectXTex/d3dx12.h"
+#include "../externals/DirectXTex/d3dx12.h"
 
 #pragma comment(lib, "d3d12.lib")
 #pragma comment(lib, "dxgi.lib")
@@ -18,13 +18,13 @@ const uint32_t DirectXCommon::kMaxSRVCount = 512;
 
 void DirectXCommon::Initialize(WinApp* winApp)
 {
-	//NULL検出
+	// NULL検出
 	assert(winApp);
 
-	//FPS固定初期化
+	// FPS固定初期化
 	InitializeFixFPS();
 
-	//メンバ変数に記録
+	// メンバ変数に記録
 	this->winApp_ = winApp;
 
 	//初期化・生成
@@ -163,8 +163,8 @@ void DirectXCommon::SwapChainCreate()
 	HRESULT hr;
 
 	// --- スワップチェーン生成・設定 ---
-	swapChainDesc.Width = WinApp::kClientWidth;                  // 画面の幅。ウィンドウンおクライアント領域を同じものにしておく
-	swapChainDesc.Height = WinApp::kClientHeight;                // 画面の高さ。ウィンドウのクライアント領域を同じものにしておく
+	swapChainDesc.Width = kClientWidth;                  // 画面の幅。ウィンドウンおクライアント領域を同じものにしておく
+	swapChainDesc.Height = kClientHeight;                // 画面の高さ。ウィンドウのクライアント領域を同じものにしておく
 	swapChainDesc.Format = DXGI_FORMAT_R8G8B8A8_UNORM;           // 色の形式
 	swapChainDesc.SampleDesc.Count = 1;                          // マルチサンプルしない
 	swapChainDesc.BufferUsage = DXGI_USAGE_RENDER_TARGET_OUTPUT; // 描画のターゲットとして利用する
@@ -180,7 +180,7 @@ void DirectXCommon::SwapChainCreate()
 void DirectXCommon::DepthBufferCreate()
 {
 	// --- DepthStencilTextureをウィンドウサイズで作成 ---
-	depthStencilResource = CreateDepthStencilTextureResource(device_, WinApp::kClientWidth, WinApp::kClientHeight);
+	depthStencilResource = CreateDepthStencilTextureResource(device_, kClientWidth, kClientHeight);
 }
 
 void DirectXCommon::DescriptorHeapCreate()
@@ -250,8 +250,8 @@ void DirectXCommon::FenceInitialize()
 void DirectXCommon::ViewportRectInitialize()
 {
 	// --- ビューポート矩形の設定 ---
-	viewport.Width = WinApp::kClientWidth;
-	viewport.Height = WinApp::kClientHeight;
+	viewport.Width = kClientWidth;
+	viewport.Height = kClientHeight;
 	viewport.TopLeftX = 0;
 	viewport.TopLeftY = 0;
 	viewport.MinDepth = 0.0f;
@@ -262,9 +262,9 @@ void DirectXCommon::ScissorRect()
 {
 	// --- シザー矩形の設定 ---
 	scissorRect.left = 0;
-	scissorRect.right = WinApp::kClientWidth;
+	scissorRect.right = kClientWidth;
 	scissorRect.top = 0;
-	scissorRect.bottom = WinApp::kClientHeight;
+	scissorRect.bottom = kClientHeight;
 }
 
 void DirectXCommon::DXCCompilerCreate()
@@ -309,10 +309,6 @@ void DirectXCommon::PreDraw()
 
 	// --- 画面全体の深度をクリア ---
 	commandList->ClearDepthStencilView(dsvHandle, D3D12_CLEAR_FLAG_DEPTH, 1.0f, 0, 0, nullptr);
-
-	// --- SRV用のデスクリプタヒープを指定する ---
-	//Microsoft::WRL::ComPtr<ID3D12DescriptorHeap> descriptorHeaps[] = { srvDescriptorHeap };
-	//commandList->SetDescriptorHeaps(1, descriptorHeaps->GetAddressOf());
 
 	// --- ビューポート領域の設定 ---
 	commandList->RSSetViewports(1, &viewport);
@@ -601,7 +597,7 @@ DirectX::ScratchImage DirectXCommon::LoadTexture(const std::string& filePath)
 
 void DirectXCommon::InitializeFixFPS()
 {
-	//現在時間を記録
+	// 現在時間を記録
 	reference_ = std::chrono::steady_clock::now();
 }
 

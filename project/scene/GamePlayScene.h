@@ -1,6 +1,8 @@
 #pragma once
 #include <Framework.h>
 #include <BaseScene.h>
+
+#include <Audio.h>
 #include <Sprite.h>
 #include <Object3d.h>
 

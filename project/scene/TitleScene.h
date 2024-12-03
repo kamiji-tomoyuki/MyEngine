@@ -1,7 +1,11 @@
 #pragma once
+// 必須
 #include <Framework.h>
 #include <BaseScene.h>
-#include <SceneManager.h>
+
+// 用途に合わせて追加
+#include <Audio.h>
+#include <Input.h>
 #include <Sprite.h>
 #include <Object3d.h>
 
@@ -23,13 +27,14 @@ public:
 private: // メンバ変数
 	// カメラ
 	Camera* camera = nullptr;
+
+	// ===== sample =====
+	// スプライト
+	Sprite* sprite = nullptr;
+
+	// 3Dオブジェクト
+	Object3d* object3d = nullptr;
+
 	// サウンド
 	SoundData soundData;
-
-	// 2Dスプライト
-	std::vector<Sprite*> sprites;
-	// 3Dオブジェクト
-	std::vector<Object3d*> object3ds;
-
-	SceneManager* sceneManager_;
 };

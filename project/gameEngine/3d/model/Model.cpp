@@ -90,7 +90,7 @@ void Model::MaterialResource()
 	materialData->uvTransform = MakeIdentity4x4();
 }
 
-Model::MaterialData Model::LoadMaterialTemplateFile(const std::string& directoryPath, const std::string& filename)
+MaterialData Model::LoadMaterialTemplateFile(const std::string& directoryPath, const std::string& filename)
 {
 	MaterialData materialData;
 	std::string line;
@@ -111,7 +111,7 @@ Model::MaterialData Model::LoadMaterialTemplateFile(const std::string& directory
 	return materialData;
 }
 
-Model::ModelData Model::LoadModelFile(const std::string& directoryPath, const std::string& filename)
+ModelData Model::LoadModelFile(const std::string& directoryPath, const std::string& filename)
 {
 	ModelData modelData;
 
@@ -178,7 +178,7 @@ Model::ModelData Model::LoadModelFile(const std::string& directoryPath, const st
 	return modelData;
 }
 
-Model::Node Model::ReadNode(aiNode* node)
+Node Model::ReadNode(aiNode* node)
 {
 	Node result;
 	aiMatrix4x4 aiLocalMatrix = node->mTransformation;
@@ -197,7 +197,7 @@ Model::Node Model::ReadNode(aiNode* node)
 	return result;
 }
 
-Model::Animation Model::LoadAnimationFile(const std::string& directoryPath, const std::string& filename)
+Animation Model::LoadAnimationFile(const std::string& directoryPath, const std::string& filename)
 {
 	// --- LoadAnimation ---
 	Assimp::Importer importer;

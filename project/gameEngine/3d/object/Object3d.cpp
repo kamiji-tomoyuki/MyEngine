@@ -54,6 +54,9 @@ void Object3d::Update()
 
 void Object3d::Draw()
 {
+	// --- 更新 ---
+	Update();
+
 	// --- 座標変換行列CBufferの場所を設定 ---
 	object3dCommon->GetDxCommon()->GetCommandList()->SetGraphicsRootConstantBufferView(1, transformationMatrixResource->GetGPUVirtualAddress());
 

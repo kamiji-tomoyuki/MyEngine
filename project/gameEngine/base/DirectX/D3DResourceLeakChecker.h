@@ -2,7 +2,7 @@
 class D3DResourceLeakChecker
 {
 public:
-	//デストラクタ
+	// デストラクタ
 	~D3DResourceLeakChecker();
 };
 
