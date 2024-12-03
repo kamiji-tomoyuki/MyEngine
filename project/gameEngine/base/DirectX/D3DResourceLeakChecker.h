@@ -5,4 +5,3 @@ public:
 	// デストラクタ
 	~D3DResourceLeakChecker();
 };
-
