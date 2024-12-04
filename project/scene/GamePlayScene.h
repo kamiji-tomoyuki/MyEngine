@@ -3,8 +3,8 @@
 #include <BaseScene.h>
 
 #include <Audio.h>
-#include <Sprite.h>
-#include <Object3d.h>
+
+#include "Sample.h"
 
 class GamePlayScene : public BaseScene
 {
@@ -25,10 +25,8 @@ private: // メンバ変数
 	// カメラ
 	Camera* camera = nullptr;
 
-	// 2Dスプライト
-	std::vector<Sprite*> sprites;
-	// 3Dオブジェクト
-	std::vector<Object3d*> object3ds;
+	// サンプルクラス
+	std::unique_ptr<Sample> sample;
 
 	// サウンド
 	SoundData soundDataSet;
