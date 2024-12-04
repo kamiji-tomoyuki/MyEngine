@@ -57,9 +57,6 @@ void Draw2D::Initialize(DirectXCommon* dxCommon)
 	// 線の頂点データを生成
 	lineData_ = new LineData();
 	CreateLineVertexData(lineData_);
-
-	// 球の頂点位置を計算
-	CalcSphereVertexData();
 }
 
 void Draw2D::DrawTriangle(const Vector2& pos1, const Vector2& pos2, const Vector2& pos3, const Vector4& color)
@@ -248,49 +245,6 @@ void Draw2D::DrawLine(const Vector2& start, const Vector2& end, const Vector4& c
 
 }
 
-void Draw2D::DrawLine(const Vector2& start, const Vector2& end, const Vector4& color, const Matrix4x4& viewProjectionMatrix)
-{
-	// 3D座標を2D座標に変換
-	Vector3 start3D = Vector3(start.x, start.y, 0.0f);
-	Vector3 end3D = Vector3(end.x, end.y, 0.0f);
-
-	Vector3 start2D = Transform(start3D, viewProjectionMatrix);
-	Vector3 end2D = Transform(end3D, viewProjectionMatrix);
-
-	// ビューポート
-	start2D = Transform(start2D, viewPortMatrix_);
-	end2D = Transform(end2D, viewPortMatrix_);
-
-	DrawLine(Vector2(start2D.x, start2D.y), Vector2(end2D.x, end2D.y), color);
-}
-
-void Draw2D::DrawSphere(const Vector3& center, const float radius, const Vector4& color, const Matrix4x4& viewProjectionMatrix)
-{
-	Matrix4x4 worldMatrix = MakeAffineMatrix(Vector3(radius, radius, radius), Vector3(0.0f, 0.0f, 0.0f), center);
-	for (uint32_t i = 0; i < spheres_.size(); i += 3)
-	{
-		Vector3 a = spheres_[i];
-		Vector3 b = spheres_[i + 1];
-		Vector3 c = spheres_[i + 2];
-
-		a = Transform(a, worldMatrix);
-		b = Transform(b, worldMatrix);
-		c = Transform(c, worldMatrix);
-
-		a = Transform(a, viewProjectionMatrix);
-		b = Transform(b, viewProjectionMatrix);
-		c = Transform(c, viewProjectionMatrix);
-
-		a = Transform(a,viewPortMatrix_);
-		b = Transform(b,viewPortMatrix_);
-		c = Transform(c,viewPortMatrix_);
-
-		// ライン描画
-		DrawLine(Vector2(a.x, a.y), Vector2(b.x, b.y), color);
-		DrawLine(Vector2(b.x, b.y), Vector2(c.x, c.y), color);
-	}
-}
-
 void Draw2D::Reset()
 {
 	triangleIndex_ = 0;
@@ -475,38 +429,6 @@ void Draw2D::CreateTransformMatData()
 	transformationMatrixBuffer_->Map(0, nullptr, reinterpret_cast<void**>(&transformationMatrixData_));
 
 	transformationMatrixData_->WVP = projectionMatrix_;
-}
-
-void Draw2D::CalcSphereVertexData()
-{
-	const uint32_t kSubdivision = 3; // 1分割数
-	const float kLonEvery = 2.0f * 3.14159265359f / float(kSubdivision); // 経度の1分割の角度 phi
-	const float kLatEvery = 3.14159265359f / float(kSubdivision); // 緯度の1分割の角度 theta
-
-	// 緯度方向のループ
-	for (uint32_t latIndex = 0; latIndex < kSubdivision; latIndex++) {
-		float lat = -3.14159265359f / 2.0f + kLatEvery * float(latIndex);
-		// 経度方向のループ
-		for (uint32_t lonIndex = 0; lonIndex < kSubdivision; lonIndex++) {
-			float lon = kLonEvery * float(lonIndex);
-			// 球の表面上の点を求める
-			Vector3 a, b, c;
-			a.x = 0.0f + 1.0f * cosf(lat) * cosf(lon);
-			a.y = 0.0f + 1.0f * sinf(lat);
-			a.z = 0.0f + 1.0f * cosf(lat) * sinf(lon);
-			b.x = 0.0f + 1.0f * cosf(lat + kLatEvery) * cosf(lon);
-			b.y = 0.0f + 1.0f * sinf(lat + kLatEvery);
-			b.z = 0.0f + 1.0f * cosf(lat + kLatEvery) * sinf(lon);
-			c.x = 0.0f + 1.0f * cosf(lat) * cosf(lon + kLonEvery);
-			c.y = 0.0f + 1.0f * sinf(lat);
-			c.z = 0.0f + 1.0f * cosf(lat) * sinf(lon + kLonEvery);
-
-			// 座標を保存
-			spheres_.push_back(a);
-			spheres_.push_back(b);
-			spheres_.push_back(c);
-		}
-	}
 }
 
 

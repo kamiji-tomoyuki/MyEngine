@@ -62,7 +62,7 @@ void Framework::Initialize()
 	// 3Dオブジェクト
 	Object3dCommon::GetInstance()->Initialize(dxCommon);
 
-	// ライン
+	// 2D描画
 	Draw2D::GetInstance()->Initialize(dxCommon);
 
 	// スプライト

@@ -40,10 +40,6 @@ public: // メンバ関数
 
 	// 線の描画
 	void DrawLine(const Vector2& start, const Vector2& end, const Vector4& color);
-	void DrawLine(const Vector2& start, const Vector2& end, const Vector4& color, const Matrix4x4& viewProjectionMatrix);
-
-	// 球の描画
-	void DrawSphere(const Vector3& center, const float radius, const Vector4& color, const Matrix4x4& viewProjectionMatrix);
 
 	// リセット
 	void Reset();
@@ -74,43 +70,36 @@ private:
 	// 座標変換行列データの生成
 	void CreateTransformMatData();
 
-	// 球の頂点位置の計算
-	void CalcSphereVertexData();
-
 private:
 	DirectXCommon* dxCommon_;
 
+	// 三角形データ
 	const uint32_t kTrriangleMaxCount = 30096;
 	const uint32_t kVertexCountTrriangle = 3;
+	uint32_t triangleIndex_ = 0;
+	TriangleData* triangleData_;
 
+	// 矩形データ
 	const uint32_t kBoxMaxCount = 30096;
 	const uint32_t kVertexCountBox = 4;
 	const uint32_t kIndexCountBox = 6;
-
-	const uint32_t kLineMaxCount = 100000;
-	const uint32_t kVertexCountLine = 2;
-
-	// 三角形のインデックス
-	uint32_t triangleIndex_ = 0;
-
-	// 矩形のインデックス
 	uint32_t boxIndexIndex_ = 0;
 	uint32_t boxVertexIndex_ = 0;
+	BoxData* boxData_;
 
-	// 線のインデックス
+	// 線データ
+	const uint32_t kLineMaxCount = 100000;
+	const uint32_t kVertexCountLine = 2;
 	uint32_t lineIndex_ = 0;
+	LineData* lineData_;
 
 	// マトリックス
 	Matrix4x4 projectionMatrix_;
 	Matrix4x4 viewPortMatrix_;
 
-	Matrix4x4 debugViewMatrix_;
-	Matrix4x4 debugProjectionMatrix_;
-
 	// ルートシグネチャ
 	Microsoft::WRL::ComPtr<ID3D12RootSignature> triangleRootSignature_;
 	Microsoft::WRL::ComPtr<ID3D12RootSignature> lineRootSignature_;
-
 	// パイプラインステート
 	Microsoft::WRL::ComPtr<ID3D12PipelineState> trianglePipelineState_;
 	Microsoft::WRL::ComPtr<ID3D12PipelineState> linePipelineState_;
@@ -121,15 +110,4 @@ private:
 	// 座標変換行列データ
 	TransformationMatrix2D* transformationMatrixData_;
 
-	// 三角形データ
-	TriangleData* triangleData_;
-
-	// 矩形データ
-	BoxData* boxData_;
-
-	// 線データ
-	LineData* lineData_;
-
-	// 球のデータ
-	std::vector<Vector3> spheres_;
 };
