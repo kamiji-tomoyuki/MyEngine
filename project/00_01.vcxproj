@@ -109,6 +109,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="gameEngine\3d\object\Draw3D.cpp" />
     <ClCompile Include="gameEngine\2d\Draw2D.cpp" />
     <ClCompile Include="gameEngine\3d\ViewProjection.cpp" />
     <ClCompile Include="gameEngine\3d\WorldTransform.cpp" />
@@ -153,6 +154,8 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClCompile Include="scene\SceneFactory.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="gameEngine\3d\object\CollisionStruct.h" />
+    <ClInclude Include="gameEngine\3d\object\Draw3D.h" />
     <ClInclude Include="gameEngine\2d\Draw2D.h" />
     <ClInclude Include="gameEngine\2d\Draw2DStruct.h" />
     <ClInclude Include="gameEngine\3d\model\ModelStruct.h" />
