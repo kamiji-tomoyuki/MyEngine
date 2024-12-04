@@ -232,6 +232,9 @@
       <Filter>ソース ファイル\scene</Filter>
     </ClCompile>
     <ClCompile Include="gameEngine\3d\object\Draw3D.cpp">
+      <Filter>ソース ファイル\gameEngine\3d\object</Filter>
+    </ClCompile>
+    <ClCompile Include="scene\include\Sample.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
   </ItemGroup>
@@ -381,6 +384,9 @@
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
     <ClInclude Include="gameEngine\3d\object\CollisionStruct.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="scene\include\Sample.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
   </ItemGroup>
