@@ -60,7 +60,9 @@ void MyGame::Draw()
 
 	// ----------------------
 
+#ifdef _DEBUG
 	imGuiManager->Draw();
+#endif // _DEBUG
 
 	// 描画後処理
 	dxCommon->PostDraw();

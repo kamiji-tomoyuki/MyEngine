@@ -23,7 +23,6 @@ void Draw2D::Finalize()
 	triangleData_->vertexBuffer->Release();
 
 	boxData_->vertexBuffer->Release();
-
 	boxData_->indexBuffer->Release();
 
 	lineData_->vertexBuffer->Release();

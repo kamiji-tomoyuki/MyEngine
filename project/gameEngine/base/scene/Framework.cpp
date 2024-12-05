@@ -12,15 +12,18 @@ void Framework::Run()
 			break;
 		}
 		// ===== 更新処理 =====
-
+#ifdef _DEBUG
 		// ImGui開始
 		imGuiManager->Begin();
+#endif // _DEBUG
 
 		// 毎フレーム更新
 		Update();
 
+#ifdef _DEBUG
 		// ImGui終了
 		imGuiManager->End();
+#endif // _DEBUG
 
 		// ===== 描画処理 =====
 
@@ -88,9 +91,9 @@ void Framework::Finalize()
 
 	Object3dCommon::GetInstance()->Finalize();
 
-	SpriteCommon::GetInstance()->Finalize();
-
 	Draw2D::GetInstance()->Finalize();
+
+	SpriteCommon::GetInstance()->Finalize();
 
 	SceneManager::GetInstance()->Finalize();
 
